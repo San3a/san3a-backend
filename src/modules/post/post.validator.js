@@ -4,7 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 import { FAIL } from '#src/shared/utils/response-status.js';
 
 const createPostSchema = Joi.object({
-    user: Joi.string().required().label('User ID'),
+    user: Joi.string().hex().length(24).required().label('User ID'),
 
     title: Joi.string().min(5).max(100).required().label('Title'),
 
