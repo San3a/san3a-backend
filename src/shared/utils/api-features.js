@@ -47,12 +47,12 @@ class ApiFeatures {
             // Handle operator-based filters like ?price[gt]=20 → { price: { $gt: 20 } }
             if (typeof value === 'object' && !Array.isArray(value)) {
                 Object.keys(value).forEach((op) => {
-                    if (!isNaN(value[op])) {
+                    if (!Number.isNaN(value[op])) {
                         value[op] = Number(value[op]);
                     }
                 });
                 // Handle direct numeric filters like ?rating=5 → { rating: 5 }
-            } else if (!isNaN(value)) {
+            } else if (!Number.isNaN(value)) {
                 parsedQuery[key] = Number(value);
                 // Handle text filters like ?name=chair → { name: /chair/i }
             } else if (typeof value === 'string') {
