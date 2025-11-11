@@ -1,9 +1,10 @@
 import AppError from '#src/shared/utils/app-error.js';
 import { ERROR } from '#src/shared/utils/response-status.js';
+import { StatusCodes } from 'http-status-codes';
 
 const handleCastErrorDB = (err) => {
     const message = `Invalid ${err.path}: ${err.value}`;
-    return new AppError(message, 400);
+    return new AppError(message, StatusCodes.BAD_REQUEST);
 };
 
 const handleDuplicatedFieldDB = (err) => {
@@ -11,13 +12,13 @@ const handleDuplicatedFieldDB = (err) => {
     const value = Object.values(err.keyValue)[0];
     const message = `Duplicated field: ${field} with value: ${value}. Please use another value!`;
 
-    return new AppError(message, 400);
+    return new AppError(message, StatusCodes.BAD_REQUEST);
 };
 
 const handleValidationErrorDB = (err) => {
     const errors = Object.values(err.errors).map((el) => el.message);
     const message = `Invalid input data. ${errors.join('. ')}`;
-    return new AppError(message, 400);
+    return new AppError(message, StatusCodes.BAD_REQUEST);
 };
 
 const sendErrorDev = (err, res) => {
@@ -44,20 +45,21 @@ const sendErrorProd = (err, res) => {
         console.error('Error 🔥', err);
 
         //2) Send Error
-        res.status(500).json({
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             status: ERROR,
             message: 'Something went wrong',
         });
     }
 };
 
-const handleJWTError = () => new AppError('Invalid token. Please log in again!', 401);
+const handleJWTError = () =>
+    new AppError('Invalid token. Please log in again!', StatusCodes.UNAUTHORIZED);
 
 const handleJWTExpiredError = () =>
-    new AppError('Your token has expired. Please log in again!', 401);
+    new AppError('Your token has expired. Please log in again!', StatusCodes.UNAUTHORIZED);
 
 export default (err, req, res, next) => {
-    err.statusCode = err.statusCode || 500;
+    err.statusCode = err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
     err.status = err.status || ERROR;
     if (process.env.NODE_ENV === 'development') {
         sendErrorDev(err, res);

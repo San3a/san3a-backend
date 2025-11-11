@@ -2,6 +2,7 @@ import ApiFeatures from '#src/shared/utils/api-features.js';
 import AppError from '#src/shared/utils/app-error.js';
 import { asyncHandler } from '#src/shared/utils/async-handler.js';
 import { SUCCESS } from '#src/shared/utils/response-status.js';
+import { StatusCodes } from 'http-status-codes';
 
 const getModelNameInLowerCase = (Model) => Model.modelName.toLowerCase();
 
@@ -12,7 +13,7 @@ export const deleteOne = (Model) =>
         if (!doc) {
             return next(new AppError(`No ${modelName} found with that ID`, 404));
         }
-        res.status(204).json({ status: SUCCESS, data: null });
+        res.status(StatusCodes.NO_CONTENT).json({ status: SUCCESS, data: null });
     });
 
 export const updateOne = (Model) =>
@@ -26,13 +27,13 @@ export const updateOne = (Model) =>
         if (!doc) {
             return next(new AppError(`No ${modelName} found with that ID`, 404));
         }
-        res.status(200).json({ status: SUCCESS, data: doc });
+        res.status(StatusCodes.OK).json({ status: SUCCESS, data: doc });
     });
 
 export const createOne = (Model) =>
     asyncHandler(async (req, res, next) => {
         const doc = await Model.create(req.body);
-        res.status(201).json({
+        res.status(StatusCodes.CREATED).json({
             status: SUCCESS,
             data: doc,
         });
@@ -54,7 +55,7 @@ export const getOne = (Model, populateOptions) =>
             return next(new AppError(`No ${modelName} found with that ID`, 404));
         }
 
-        res.status(200).json({
+        res.status(StatusCodes.OK).json({
             status: SUCCESS,
             data: doc,
         });
@@ -79,7 +80,7 @@ export const getAll = (Model, populateOptions = null, nestedFilter = {}) =>
 
         const docs = await query;
 
-        res.status(200).json({
+        res.status(StatusCodes.OK).json({
             status: SUCCESS,
             results: docs.length,
             data: docs,
