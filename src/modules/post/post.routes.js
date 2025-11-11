@@ -3,6 +3,7 @@ import {
     DELETE_POST,
     GET_ALL_POSTS,
     GET_POST,
+    GET_USER_POSTS,
     SELECT_POST_OFFER,
     UPDATE_POST,
     UPDATE_POST_STATUS,
@@ -12,6 +13,7 @@ import {
     deletePost,
     getAllPosts,
     getPost,
+    getUserPosts,
     updatePost,
     updatePostStatus,
     updateSelectedOffer,
@@ -36,6 +38,9 @@ router
     .get(isAuthorized(GET_POST), getPost)
     .patch(isAuthorized(UPDATE_POST), validateUpdatePost, updatePost)
     .delete(isAuthorized(DELETE_POST), deletePost);
+
+router.get(isAuthorized(GET_USER_POSTS), getUserPosts);
+
 router.patch(
     '/:id/status',
     isAuthorized(UPDATE_POST_STATUS),

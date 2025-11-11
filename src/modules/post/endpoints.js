@@ -1,4 +1,5 @@
 export const GET_ALL_POSTS = 'post:GET_ALL_POSTS';
+export const GET_USER_POSTS = 'post:GET_USER_POSTS';
 export const GET_POST = 'post:GET_POST';
 export const CREATE_POST = 'post:CREATE_POST';
 export const UPDATE_POST = 'post:UPDATE_POST';
