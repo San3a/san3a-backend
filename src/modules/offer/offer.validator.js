@@ -1,8 +1,6 @@
 import joi from 'joi';
 
 const createOfferSchema = joi.object({
-    post: joi.string().hex().length(24).required().label('Post Id'),
-    technician: joi.string().hex().length(24).required().label('Technician Id'),
     price: joi.number().min(0).required().label('Price'),
     message: joi.string().required().label('Message'),
 });

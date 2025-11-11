@@ -30,7 +30,7 @@ import offerRoutes from '../offer/offer.routes.js';
 
 const router = express.Router({ mergeParams: true });
 
-router.use('/offers', offerRoutes);
+router.use('/:id/offers', offerRoutes);
 
 router
     .route('/')
