@@ -1,3 +1,4 @@
+import TechnicianRoles from '#src/shared/enums/technician-roles.js';
 import mongoose from 'mongoose';
 
 const postSchema = new mongoose.Schema({
@@ -43,8 +44,7 @@ const postSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        // this is the intitial list of categories, more can be added later
-        enum: ['Plumbing', 'Electrical', 'AC Repair', 'Painting', 'Carpentry'],
+        enum: Object.values(TechnicianRoles),
         required: [true, 'Post must have a category'],
     },
     location: {
@@ -83,7 +83,7 @@ const postSchema = new mongoose.Schema({
 
 postSchema.index({ location: '2dsphere' });
 
-postSchema.pre('save', (next) => {
+postSchema.pre('save', function (next) {
     if (!this.isNew) this.updatedAt = Date.now();
     next();
 });

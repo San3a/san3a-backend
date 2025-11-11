@@ -8,4 +8,4 @@ export const createPost = factory.createOne(Post);
 export const updatePost = factory.updateOne(Post);
 export const deletePost = factory.deleteOne(Post);
 export const updatePostStatus = factory.updateOne(Post);
-export const selectPostOffer = factory.updateOne(Post);
+export const updateSelectedOffer = factory.updateOne(Post);

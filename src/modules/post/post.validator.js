@@ -1,8 +1,9 @@
-import { FAIL } from '#src/shared/utils/response-status';
-import { StatusCodes } from 'http-status-codes';
 import Joi from 'joi';
+import TechnicianRoles from '#src/shared/enums/technician-roles.js';
+import { StatusCodes } from 'http-status-codes';
+import { FAIL } from '#src/shared/utils/response-status.js';
 
-const postValidationSchema = Joi.object({
+const createPostSchema = Joi.object({
     user: Joi.string().required().label('User ID'),
 
     title: Joi.string().min(5).max(100).required().label('Title'),
@@ -21,7 +22,7 @@ const postValidationSchema = Joi.object({
     tags: Joi.array().items(Joi.string().lowercase().trim()).max(10).label('Tags'),
 
     category: Joi.string()
-        .valid('Plumbing', 'Electrical', 'AC Repair', 'Painting', 'Carpentry')
+        .valid(...Object.values(TechnicianRoles))
         .required()
         .label('Category'),
 
@@ -38,13 +39,46 @@ const postValidationSchema = Joi.object({
     offersCount: Joi.number().integer().min(0).default(0).label('Offers Count'),
 
     selectedOffer: Joi.string().optional().allow(null).label('Selected Offer'),
-});
+}).unknown(false);
 
-export const validatePost = (req, res, next) => {
-    const { error } = postValidationSchema.validate(req.body, { abortEarly: false });
+const updatePostSchema = Joi.object({
+    title: Joi.string().min(5).max(100),
+    description: Joi.string().min(5),
+    images: Joi.array().items(
+        Joi.object({
+            public_id: Joi.string().required(),
+            url: Joi.string().uri().required(),
+        })
+    ),
+    tags: Joi.array().items(Joi.string().lowercase().trim()).max(10),
+    category: Joi.string().valid(...Object.values(TechnicianRoles)),
+    location: Joi.object({
+        type: Joi.string().valid('Point'),
+        coordinates: Joi.array().items(Joi.number()).length(2),
+        address: Joi.string().allow(''),
+    }),
+})
+    .min(1)
+    .unknown(false);
+
+const updatePostStatusSchema = Joi.object({
+    status: Joi.string().valid('open', 'in-progress', 'completed').required(),
+}).unknown(false);
+
+const updateSelectedOfferSchema = Joi.object({
+    selectedOffer: Joi.string().required(),
+}).unknown(false);
+
+const validate = (schema) => (req, res, next) => {
+    const { error } = schema.validate(req.body, { abortEarly: false });
     if (error) {
         const errors = error.details.map((d) => d.message);
         return res.status(StatusCodes.BAD_REQUEST).json({ status: FAIL, errors });
     }
     next();
 };
+
+export const validateCreatePost = validate(createPostSchema);
+export const validateUpdatePost = validate(updatePostSchema);
+export const validateUpdatePostStatus = validate(updatePostStatusSchema);
+export const validateUpdateSelectedOffer = validate(updateSelectedOfferSchema);
