@@ -1,4 +1,13 @@
 import {
+    CREATE_POST,
+    DELETE_POST,
+    GET_ALL_POSTS,
+    GET_POST,
+    SELECT_POST_OFFER,
+    UPDATE_POST,
+    UPDATE_POST_STATUS,
+} from '#src/modules/post/endpoints.js';
+import {
     createPost,
     deletePost,
     getAllPosts,
@@ -13,13 +22,31 @@ import {
     validateUpdatePostStatus,
     validateUpdateSelectedOffer,
 } from '#src/modules/post/post.validator.js';
+import { isAuthorized } from '#src/shared/middlewares/authorization.middleware.js';
 import express from 'express';
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
-router.route('/').get(getAllPosts).post(validateCreatePost, createPost);
-router.route('/:id').get(getPost).patch(validateUpdatePost, updatePost).delete(deletePost);
-router.patch('/:id/status', validateUpdatePostStatus, updatePostStatus);
-router.patch('/:id/select-offer', validateUpdateSelectedOffer, updateSelectedOffer);
+router
+    .route('/')
+    .get(isAuthorized(GET_ALL_POSTS), getAllPosts)
+    .post(isAuthorized(CREATE_POST), validateCreatePost, createPost);
+router
+    .route('/:id')
+    .get(isAuthorized(GET_POST), getPost)
+    .patch(isAuthorized(UPDATE_POST), validateUpdatePost, updatePost)
+    .delete(isAuthorized(DELETE_POST), deletePost);
+router.patch(
+    '/:id/status',
+    isAuthorized(UPDATE_POST_STATUS),
+    validateUpdatePostStatus,
+    updatePostStatus
+);
+router.patch(
+    '/:id/select-offer',
+    isAuthorized(SELECT_POST_OFFER),
+    validateUpdateSelectedOffer,
+    updateSelectedOffer
+);
 
 export default router;
