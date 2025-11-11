@@ -1,3 +1,4 @@
+import cloudinaryV2 from '#src/config/cloudinary.js';
 import ApiFeatures from '#src/shared/utils/api-features.js';
 import AppError from '#src/shared/utils/app-error.js';
 import { asyncHandler } from '#src/shared/utils/async-handler.js';
@@ -18,7 +19,36 @@ export const deleteOne = (Model) =>
 
 export const updateOne = (Model) =>
     asyncHandler(async (req, res, next) => {
-        const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
+        const body = {
+            ...req.body,
+        };
+
+        if (req.files && req.files.length > 0) {
+            let updatedImages = [];
+            const images = [];
+            await Promise.all(
+                req.files.map(async (file) => {
+                    const result = await cloudinaryV2.uploader.upload(file.path, {
+                        folder: Model.modelName,
+                    });
+
+                    images.push({
+                        url: result.secure_url,
+                        public_id: result.public_id,
+                    });
+                })
+            ).then(async () => {
+                const item = await Model.findById(req.params.id);
+                if (!item) {
+                    return next(new AppError(`No ${Model.modelName} found with that ID`, 404));
+                }
+
+                updatedImages = [...item.images, ...images];
+                body.images = updatedImages;
+            });
+        }
+
+        const doc = await Model.findByIdAndUpdate(req.params.id, body, {
             new: true,
             runValidators: true,
         });
@@ -27,7 +57,7 @@ export const updateOne = (Model) =>
         if (!doc) {
             return next(new AppError(`No ${modelName} found with that ID`, 404));
         }
-        res.status(StatusCodes.OK).json({ status: SUCCESS, data: doc });
+        res.status(200).json({ status: SUCCESS, data: doc });
     });
 
 export const createOne = (Model) =>
@@ -60,6 +90,39 @@ export const getOne = (Model, populateOptions) =>
             data: doc,
         });
     });
+
+export const createOneWithImages = (Model) =>
+    asyncHandler(async (req, res, next) => {
+        const images = [];
+        if (!req.files || req.files.length === 0) {
+            const err = new AppError('Each product must have at least one photo', 400);
+            return next(err);
+        }
+
+        await Promise.all(
+            req.files.map(async (file) => {
+                const result = await cloudinaryV2.uploader.upload(file.path, {
+                    folder: Model.modelName,
+                });
+                images.push({
+                    url: result.secure_url,
+                    public_id: result.public_id,
+                });
+            })
+        );
+
+        const body = { ...req.body, images };
+        console.log(`This is the body ${body}`);
+
+        const doc = await Model.create(body);
+
+        res.status(201).json({
+            status: SUCCESS,
+            data: doc,
+            images: images,
+        });
+    });
+
 
 export const getAll = (Model, populateOptions = null, nestedFilter = {}) =>
     asyncHandler(async (req, res, next) => {

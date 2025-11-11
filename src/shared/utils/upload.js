@@ -7,7 +7,7 @@ export const upload = multer({
         fileSize: 5 * 1024 * 1024
     },
     fileFilter: (req, file, cb) => {
-        if (!file.mimetype.match(/\.(jpg|jpeg|png|gif)$/)) {
+        if(!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
             const appError = new AppError('This field only accepts image!', 400);
             return cb(appError, false);
         }
