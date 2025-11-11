@@ -26,8 +26,11 @@ import {
 } from '#src/modules/post/post.validator.js';
 import { isAuthorized } from '#src/shared/middlewares/authorization.middleware.js';
 import express from 'express';
+import offerRoutes from '../offer/offer.routes.js';
 
 const router = express.Router({ mergeParams: true });
+
+router.use('/offers', offerRoutes);
 
 router
     .route('/')
