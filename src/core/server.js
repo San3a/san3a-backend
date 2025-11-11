@@ -1,4 +1,4 @@
-import { PORT } from '#src/config/config.js';
+import { PORT, SERVER_URL } from '#src/config/config.js';
 import dbConnection from '#src/config/db.js';
 import app from './app.js';
 
@@ -12,7 +12,7 @@ process.on('uncaughtException', (err) => {
         await dbConnection();
 
         const server = app.listen(PORT, () => {
-            console.log(`🚀 Server running on http://localhost:${PORT}`);
+            console.log(`🚀 Server running on ${SERVER_URL}:${PORT}`);
         });
 
         process.on('unhandledRejection', (err) => {
