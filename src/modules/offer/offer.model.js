@@ -44,4 +44,9 @@ offerSchema.pre('findOneAndUpdate', function (next) {
     next();
 });
 
+offerSchema.pre(/^find/, function (next) {
+    this.populate('technician');
+    next();
+});
+
 export default mongoose.model('Offer', offerSchema);
