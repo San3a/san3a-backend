@@ -1,6 +1,7 @@
 import { PORT } from '#src/config/config.js';
 import dbConnection from '#src/config/db.js';
 import app from './app.js';
+import 'dotenv/config';
 
 process.on('uncaughtException', (err) => {
     console.error(`💥 Uncaught Exception >> ${err.name}: ${err.message}`);
