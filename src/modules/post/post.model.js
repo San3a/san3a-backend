@@ -1,4 +1,5 @@
 import TechnicianRoles from '#src/shared/enums/technician-roles.js';
+import pointSchema from '#src/shared/utils/point-schema.js';
 import mongoose from 'mongoose';
 
 const postSchema = new mongoose.Schema({
@@ -48,13 +49,7 @@ const postSchema = new mongoose.Schema({
         required: [true, 'Post must have a category'],
     },
     location: {
-        type: {
-            type: String,
-            default: 'Point',
-            enum: ['Point'],
-            required: [true, 'Post must have a location'],
-        },
-        coordinates: [Number],
+        type: pointSchema,
         address: String,
     },
     status: {
