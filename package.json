@@ -4,8 +4,8 @@
     "description": "",
     "main": "./src/core/server.js",
     "scripts": {
-        "dev": "NODE_ENV=development nodemon ./src/core/server.js",
         "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "cross-env NODE_ENV=development nodemon ./src/core/server.js",
         "start": "cross-env NODE_ENV=production node ./src/core/server.js"
     },
     "keywords": [],
