@@ -11,5 +11,6 @@ export const getUserPosts = asyncHandler(async (req, res, next) => {
 export const getPost = factory.getOne(Post);
 export const createPost = factory.createOne(Post);
 export const deletePost = factory.deleteOne(Post);
+export const updatePost = factory.updateOne(Post);
 export const updatePostStatus = factory.updateOne(Post);
 export const updateSelectedOffer = factory.updateOne(Post);
