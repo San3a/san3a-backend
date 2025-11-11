@@ -39,7 +39,12 @@ router
     .patch(isAuthorized(UPDATE_POST), validateUpdatePost, updatePost)
     .delete(isAuthorized(DELETE_POST), deletePost);
 
-router.get(isAuthorized(GET_USER_POSTS), getUserPosts);
+router.get(
+    '/me',
+    isAuthorized(GET_USER_POSTS),
+
+    getUserPosts
+);
 
 router.patch(
     '/:id/status',
