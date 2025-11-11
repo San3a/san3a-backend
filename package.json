@@ -4,7 +4,7 @@
     "description": "",
     "main": "./src/core/server.js",
     "scripts": {
-        "dev": "NODE_ENV=development nodemon ./src/core/server.js",
+        "dev": "cross-env NODE_ENV=development nodemon ./src/core/server.js",
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "cross-env NODE_ENV=production node ./src/core/server.js"
     },
@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "bcrypt": "^6.0.0",
+        "cloudinary": "^2.8.0",
         "compression": "^1.8.1",
         "cors": "^2.8.5",
         "cross-env": "^10.1.0",
