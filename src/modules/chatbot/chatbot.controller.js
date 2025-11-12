@@ -7,11 +7,11 @@ export const respondWithAiController = asyncHandler(async (req, res) => {
     const { conversationId, userMessage } = req.body;
 
     try {
-        const modelText = await respondWithAiService(conversationId, userMessage);
+        const { response, category } = await respondWithAiService(conversationId, userMessage);
 
         return res.status(StatusCodes.OK).json({
             status: SUCCESS,
-            data: modelText,
+            data: { response, category },
         });
     } catch (error) {
         console.error('AI Service Error:', error);
