@@ -50,6 +50,21 @@ const userSchema = new mongoose.Schema(
             type: Boolean,
             default: true,
         },
+        totalEarning: {
+            type: Number,
+            default: 0,
+        },
+        image: {
+            public_id: {
+                type: String,
+                required: [true, 'Image public_id is required'],
+            },
+            url: {
+                type: String,
+                required: [true, 'Image url is required'],
+            },
+        },
+        // TODO: Add address
     },
     {
         toJSON: { virtuals: true },
