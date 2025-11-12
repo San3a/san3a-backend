@@ -18,6 +18,7 @@ import {
     updatePostStatus,
     updateSelectedOffer,
 } from '#src/modules/post/post.controller.js';
+import { setPostBody } from '#src/modules/post/post.middleware.js';
 import {
     validateCreatePost,
     validateUpdatePost,
@@ -32,7 +33,7 @@ const router = express.Router({ mergeParams: true });
 router
     .route('/')
     .get(isAuthorized(GET_ALL_POSTS), getAllPosts)
-    .post(isAuthorized(CREATE_POST), validateCreatePost, createPost);
+    .post(isAuthorized(CREATE_POST), validateCreatePost, setPostBody, createPost);
 router
     .route('/:id')
     .get(isAuthorized(GET_POST), getPost)
