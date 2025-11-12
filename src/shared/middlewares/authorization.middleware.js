@@ -1,7 +1,7 @@
-import AppError from '#src/shared/utils/app-error';
-import { asyncHandler } from '#src/shared/utils/async-handler';
+import AppError from '#src/shared/utils/app-error.js';
+import { asyncHandler } from '#src/shared/utils/async-handler.js';
 import jwt from 'jsonwebtoken';
-import rbac from '#src/shared/rbac/rbac';
+import rbac from '#src/shared/rbac/rbac.js';
 import { StatusCodes } from 'http-status-codes';
 
 export const isAuthorized = (endpoint) =>

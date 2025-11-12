@@ -1,2 +1,15 @@
-// we add here endpoints that are valid for technician role
-export default [];
+import {
+    CREATE_TECHSERVICE,
+    UPDATE_TECHSERVICE,
+    DELETE_TECHSERVICE,
+    GET_ALL_TECHSERVICES,
+    GET_SPECIFIC_TECHSERVICE,
+} from '#src/modules/tech-service/endpoints.js';
+
+export default [
+    CREATE_TECHSERVICE,
+    UPDATE_TECHSERVICE,
+    DELETE_TECHSERVICE,
+    GET_ALL_TECHSERVICES,
+    GET_SPECIFIC_TECHSERVICE,
+];
