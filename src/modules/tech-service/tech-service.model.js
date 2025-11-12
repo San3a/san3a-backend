@@ -1,11 +1,12 @@
 import mongoose from 'mongoose';
 
 const techServiceSchema = new mongoose.Schema({
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: [true, 'ServiceOwner id is required'],
-    },
+    //NOTE: Change this after merging user 
+    // user: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'User',
+    //     required: [true, 'ServiceOwner id is required'],
+    // },
     title: {
         type: String,
         required: [true, 'Service name is required!'],
