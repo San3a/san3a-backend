@@ -28,7 +28,11 @@ const pastWorkSchema = new Schema({
             }
         }
     ],
-    // TODO: Add User
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: [true, 'Pastwork Must have an owner'],
+    },
     //TODO: Add category 
     location: pointSchema,
     dateCompleted: Date,
