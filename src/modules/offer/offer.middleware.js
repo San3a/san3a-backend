@@ -10,8 +10,8 @@ export const setOfferBody = (req, res, next) => {
 };
 
 export const isPostAvailable = asyncHandler(async (req, res, next) => {
-    const { postId } = req.params;
-    const post = await Post.exists({ _id: postId });
+    const { id } = req.params;
+    const post = await Post.exists({ _id: id });
     if (!post) {
         return next(new AppError('No post found with this ID', StatusCodes.NOT_FOUND));
     }

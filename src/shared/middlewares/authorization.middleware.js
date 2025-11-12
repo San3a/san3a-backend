@@ -18,7 +18,6 @@ export const isAuthorized = (endpoint) =>
                 );
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
             // check if user exists on db
-            console.log(`This is decoded: ${decoded.id}`);
             const user = await User.findOne({ _id: decoded.id });
             if (!user) next(new AppError('User not found', StatusCodes.UNAUTHORIZED));
             // check if user changed his password after init the token
