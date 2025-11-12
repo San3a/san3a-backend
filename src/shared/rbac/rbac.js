@@ -1,5 +1,5 @@
+import opts from '#src/shared/rbac/policies/index.js';
 import RBAC from 'easy-rbac';
-import opts from './policies';
 
 const rbac = new RBAC(opts);
 
