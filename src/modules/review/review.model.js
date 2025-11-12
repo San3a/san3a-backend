@@ -23,13 +23,11 @@ const reviewSchema = new Schema(
             ref: 'TechService',
             required: [true, 'Review must belong to a Service.'],
         },
-        //NOTE: Change this after merging user 
-
-        // user: {
-        //     type: mongoose.Schema.Types.ObjectId,
-        //     ref: 'User',
-        //     required: [true, 'Review must belong to a User.'],
-        // },
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: [true, 'Review must belong to a User.'],
+        },
     },
     {
         timestamps: true,
@@ -74,8 +72,7 @@ reviewSchema.statics.calcAverageRatings = async function (techServiceId) {
 };
 
 reviewSchema.post('save', async function (doc, next) {
-    //NOTE: Change this after merging user 
-    // await doc.populate({ path: 'user', select: 'name photo' });
+    await doc.populate({ path: 'user', select: 'name photo' });
     await doc.constructor.calcAverageRatings(doc.techService);
     next();
 });

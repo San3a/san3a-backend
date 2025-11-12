@@ -25,7 +25,7 @@ router
     .route('/')
     .get(getAllTechServicesHandler)
     .post(
-        // isAuthorized(CREATE_TECHSERVICE),
+        isAuthorized(CREATE_TECHSERVICE),
         upload.array('images', 5),
         handleImageCreate(TechService),
         validate(createTechServiceSchema),
