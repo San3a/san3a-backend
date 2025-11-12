@@ -15,7 +15,10 @@ const filterObj = (obj, ...allowedFields) => {
 
 // GET ALL USERS
 export const getAllUsers = asyncHandler(async (req, res, next) => {
-    const features = new APIFeatures(User.find(), req.query)
+    const features = new APIFeatures(
+        User.find({
+            active: true
+        }), req.query)
         .filter()
         .sort()
         .limitFields()

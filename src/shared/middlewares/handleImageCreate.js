@@ -23,6 +23,5 @@ export const handleImageCreate = (Model) =>
     );
 
     req.body.images = images;
-    console.log('in middleware of handle Image', images);
     next();
-})
+});
