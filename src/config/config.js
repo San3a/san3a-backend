@@ -9,3 +9,4 @@ export const { PORT } = process.env;
 export const { MONGO_URL } = process.env;
 export const { NODE_ENV } = process.env;
 export const { SERVER_URL } = process.env;
+export const { CLIENT_URL } = process.env;

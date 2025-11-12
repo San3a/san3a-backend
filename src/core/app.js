@@ -10,12 +10,16 @@ import limiter from '#src/shared/middlewares/rate-limiter.middleware.js';
 import { unhandledRoutesHandler } from '#src/shared/middlewares/unhandled-routes.middleware.js';
 import mountRoutes from '#src/modules/routes.js';
 import globalErrorHandler from '#src/shared/middlewares/global-error-handler.middleware.js';
-
-dotenv.config();
+import { CLIENT_URL } from '#src/config/config.js';
 
 const app = express();
 
-app.use(cors());
+app.use(
+    cors({
+        origin: CLIENT_URL,
+        credentials: true,
+    })
+);
 app.options('*all', cors());
 
 app.use(helmet());
