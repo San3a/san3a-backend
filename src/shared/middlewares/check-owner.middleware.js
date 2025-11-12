@@ -8,8 +8,7 @@ const restrictToOwner = (Model, ownerField = 'user', message = null) =>
         if (!doc) {
             return next(new AppError(`${Model.modelName} not found`, StatusCodes.NOT_FOUND));
         }
-
-        if (!doc[ownerField]._id.equals(req.user.id)) {
+        if (!doc[ownerField]._id.equals(req.user._id)) {
             return next(
                 new AppError(
                     message || 'You are not allowed to perform this action',

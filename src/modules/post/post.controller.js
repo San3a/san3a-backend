@@ -3,7 +3,7 @@ import * as factory from '#src/shared/services/handler-factory.js';
 import Post from './post.model.js';
 
 export const getAllPosts = factory.getAll(Post);
-export const getUserPosts = factory.getAll(Post, null, { id: 'user' });
+export const getUserPosts = factory.getAll(Post, null, { userId: 'user' });
 export const getPost = factory.getOne(Post);
 export const createPost = factory.createOne(Post);
 export const deletePost = factory.deleteOne(Post);
