@@ -6,14 +6,14 @@ const pastWorkSchema = new Schema({
         type: String,
         required: [true, 'Each past work must have a title'],
         minlength: [5, 'Title is too short it must be >= 5 characters'],
-        maxlength: [30, 'Title is too long it musn\'t exceed 30 characters'],
+        maxlength: [50, 'Title is too long it musn\'t exceed 50 characters'],
         trim: true,
     },
     description: {
         type: String,
         required: [true, 'Each past work must have a description'],
         minlength: [8, 'description is too short it must be >= 8 characters'],
-        maxlength: [300, 'description is too long it musn\'t exceed 300 characters'],
+        maxlength: [500, 'description is too long it musn\'t exceed 500 characters'],
         trim: true,
     },
     images: [
