@@ -1,3 +1,3 @@
-import { signup, login } from './auth.service.js';
+import { signup, login, forgotPassword, resetPassword, updatePassword } from './auth.service.js';
 
-export { signup, login };
+export { signup, login, forgotPassword, resetPassword, updatePassword };
