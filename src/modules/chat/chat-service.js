@@ -43,3 +43,34 @@ export const createMessage = async ({ conversationId, author, content, type }) =
 
     return await message.populate('author', 'username name avatar');
 };
+
+export const createImageMessages = async (conversationId, author, images) => {
+    const createdMessages = [];
+
+    for (const image of images) {
+        const message = new Message({
+            conversation: conversationId,
+            author,
+            content: image.url,
+            type: 'image',
+            images: [
+                {
+                    url: image.url,
+                    public_id: image.public_id,
+                },
+            ],
+        });
+
+        const savedMessage = await message.save();
+
+        // Update conversation's messages array
+        await Conversation.findByIdAndUpdate(conversationId, {
+            $push: { messages: savedMessage._id },
+        });
+
+        const populatedMessage = await savedMessage.populate('author', 'username email');
+        createdMessages.push(populatedMessage);
+    }
+
+    return createdMessages;
+};

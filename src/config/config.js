@@ -10,3 +10,6 @@ export const { MONGO_URL } = process.env;
 export const { NODE_ENV } = process.env;
 export const { SERVER_URL } = process.env;
 export const { JWT_SECRET } = process.env;
+export const { CLOUD_NAME } = process.env;
+export const { API_KEY } = process.env;
+export const { API_SECRET } = process.env;

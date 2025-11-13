@@ -1,8 +1,5 @@
 import * as chatService from './chat-service.js';
-
-/**
- * Get conversations for a user
- */
+import { getIO } from '#src/core/socketServer.js';
 export const getConversations = async (req, res) => {
     const { userId } = req.params;
     try {
@@ -14,9 +11,6 @@ export const getConversations = async (req, res) => {
     }
 };
 
-/**
- * Get messages in a conversation
- */
 export const getMessages = async (req, res) => {
     const { conversationId } = req.params;
     try {
@@ -28,9 +22,6 @@ export const getMessages = async (req, res) => {
     }
 };
 
-/**
- * Create or get a conversation
- */
 export const createConversation = async (req, res) => {
     const { participants } = req.body;
     try {
@@ -42,9 +33,6 @@ export const createConversation = async (req, res) => {
     }
 };
 
-/**
- * Send a new message
- */
 export const sendMessage = async (req, res) => {
     const { conversationId, author, content, type } = req.body;
     try {
@@ -65,9 +53,6 @@ export const sendMessage = async (req, res) => {
     }
 };
 
-/**
- * Delete a message
- */
 export const deleteMessage = async (req, res) => {
     const { messageId } = req.params;
     try {
@@ -83,5 +68,43 @@ export const deleteMessage = async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Failed to delete message' });
+    }
+};
+
+export const uploadImages = async (req, res) => {
+    try {
+        console.log('🧾 uploadImages called');
+        console.log('Files:', req.files);
+        console.log('Body:', req.body);
+        const { conversationId } = req.params;
+        const { author } = req.body;
+
+        if (!req.body.images || req.body.images.length === 0) {
+            return res.status(400).json({ message: 'No images processed' });
+        }
+
+        const createdMessages = await chatService.createImageMessages(
+            conversationId,
+            author,
+            req.body.images
+        );
+
+        req.io = getIO();
+        if (req.io) {
+            createdMessages.forEach((msg) => {
+                req.io.to(conversationId).emit('newMessage', msg);
+            });
+        }
+
+        res.status(201).json({
+            success: true,
+            messages: createdMessages,
+        });
+    } catch (err) {
+        console.error('Image upload error:', err);
+        res.status(500).json({
+            success: false,
+            message: 'Failed to upload images',
+        });
     }
 };
