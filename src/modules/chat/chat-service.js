@@ -68,7 +68,7 @@ export const createImageMessages = async (conversationId, author, images) => {
             $push: { messages: savedMessage._id },
         });
 
-        const populatedMessage = await savedMessage.populate('author', 'username email');
+        const populatedMessage = await savedMessage.populate('author', 'name email');
         createdMessages.push(populatedMessage);
     }
 
