@@ -13,7 +13,8 @@ const messageSchema = new Schema({
     },
     content: { type: String, required: true },
     date: { type: Date, default: Date.now },
-    type: { type: String, default: 'text' },
+    type: { type: String, default: 'text' }, // "text" or "image"
+    images: [{ url: String, public_id: String }],
 });
 
 export default mongoose.model('Message', messageSchema);
