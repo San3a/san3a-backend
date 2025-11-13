@@ -6,5 +6,18 @@ import {
     UPDATE_OFFER,
 } from '#src/modules/offer/endpoints.js';
 
-// we add here endpoints that are valid for technician role
-export default [CREATE_OFFER, GET_ALL_OFFERS, GET_OFFER, UPDATE_OFFER, DELETE_OFFER];
+import {
+    CREATE_TECHSERVICE,
+    UPDATE_TECHSERVICE,
+    DELETE_TECHSERVICE,
+    GET_ALL_TECHSERVICES,
+    GET_SPECIFIC_TECHSERVICE,
+} from '#src/modules/tech-service/endpoints.js';
+
+export default [CREATE_OFFER, GET_ALL_OFFERS, GET_OFFER, UPDATE_OFFER, DELETE_OFFER
+    CREATE_TECHSERVICE,
+    UPDATE_TECHSERVICE,
+    DELETE_TECHSERVICE,
+    GET_ALL_TECHSERVICES,
+    GET_SPECIFIC_TECHSERVICE,
+];

@@ -15,8 +15,24 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors());
-app.options('*all', cors());
+// Allow only your frontend origin
+app.use(
+    cors({
+        origin: 'http://localhost:5173',
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        credentials: true, // if you use cookies or auth headers
+    })
+);
+
+// Optional: handle preflight requests for all routes
+app.options(
+    '*all',
+    cors({
+        origin: 'http://localhost:5173',
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        credentials: true,
+    })
+);
 
 app.use(helmet());
 

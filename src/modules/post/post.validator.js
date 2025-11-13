@@ -1,7 +1,6 @@
 import Joi from 'joi';
 import TechnicianRoles from '#src/shared/enums/technician-roles.js';
-import { StatusCodes } from 'http-status-codes';
-import { FAIL } from '#src/shared/utils/response-status.js';
+import { validate } from '#src/shared/middlewares/validation.middleware.js';
 
 const createPostSchema = Joi.object({
     user: Joi.string().hex().length(24).required().label('User ID'),
@@ -68,15 +67,6 @@ const updatePostStatusSchema = Joi.object({
 const updateSelectedOfferSchema = Joi.object({
     selectedOffer: Joi.string().required(),
 }).unknown(false);
-
-const validate = (schema) => (req, res, next) => {
-    const { error } = schema.validate(req.body, { abortEarly: false });
-    if (error) {
-        const errors = error.details.map((d) => d.message);
-        return res.status(StatusCodes.BAD_REQUEST).json({ status: FAIL, errors });
-    }
-    next();
-};
 
 export const validateCreatePost = validate(createPostSchema);
 export const validateUpdatePost = validate(updatePostSchema);

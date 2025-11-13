@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 import validator from 'validator';
+import pointSchema from '#src/shared/utils/point-schema.js';
 
 const userSchema = new mongoose.Schema(
     {
@@ -55,16 +56,16 @@ const userSchema = new mongoose.Schema(
             default: 0,
         },
         image: {
-            public_id: {
-                type: String,
-                required: [true, 'Image public_id is required'],
-            },
-            url: {
-                type: String,
-                required: [true, 'Image url is required'],
-            },
+            public_id: String,
+            url:  String,
         },
-        // TODO: Add address
+        address: pointSchema,
+        rating: {
+            type: Number,
+            default: 0,
+            min: [0, "Product Rate can't be lower than 0"],
+            max: [5, "Product Rate can't be greater than 5"],
+        },
     },
     {
         toJSON: { virtuals: true },

@@ -7,9 +7,10 @@ const pointSchema = new mongoose.Schema({
         required: [true, 'Point type is required!'],
     },
     coordinates: {
-        type: [Number], // [latitude, longitude]
+        type: [Number], // [longitude, latitude]
         required: [true, 'Coordinates is required!'],
-        validate: [(val) => val.length === 2, 'Coordinates length must = 2 (latitude, longitude)'],
+        validate: [(val) => val.length === 2, 'Coordinates length must = 2 (longitude, latitude)'],
+        index: '2dsphere',
     },
 });
 
