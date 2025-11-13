@@ -13,7 +13,7 @@ const messageSchema = new Schema({
     },
     content: { type: String, required: true },
     date: { type: Date, default: Date.now },
-    type: { type: String, default: 'text' }, // "text" or "image"
+    type: { type: String, default: 'text' },
     images: [{ url: String, public_id: String }],
 });
 
