@@ -98,11 +98,10 @@ postSchema.pre(/^find/, function (next) {
 postSchema.pre('findOneAndDelete', async function (next) {
     const post = await this.model.findOne(this.getFilter());
 
-    // delete related offers
     await mongoose.model('Offer').deleteMany({ post: post._id });
 
     // delete images from Cloudinary if stored there
-    // for (const img of post.images) await cloudinary.uploader.destroy(img.public_id);
+    for (const img of post.images) await cloudinary.uploader.destroy(img.public_id);
 
     next();
 });

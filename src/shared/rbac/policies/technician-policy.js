@@ -1,3 +1,4 @@
+import { GET_ALL_POSTS, GET_POST, GET_USER_POSTS } from '#src/modules/post/endpoints.js';
 import {
     CREATE_OFFER,
     DELETE_OFFER,
@@ -25,4 +26,7 @@ export default [
     DELETE_TECHSERVICE,
     GET_ALL_TECHSERVICES,
     GET_SPECIFIC_TECHSERVICE,
+    GET_ALL_POSTS,
+    GET_USER_POSTS,
+    GET_POST,
 ];
