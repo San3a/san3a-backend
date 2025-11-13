@@ -1,6 +1,8 @@
 import TechnicianRoles from '#src/shared/enums/technician-roles.js';
 import pointSchema from '#src/shared/utils/point-schema.js';
+import cloudinaryV2 from '#src/config/cloudinary.js';
 import mongoose from 'mongoose';
+import Offer from '#src/modules/offer/offer.model.js';
 
 const postSchema = new mongoose.Schema({
     user: {
@@ -98,10 +100,10 @@ postSchema.pre(/^find/, function (next) {
 postSchema.pre('findOneAndDelete', async function (next) {
     const post = await this.model.findOne(this.getFilter());
 
-    await mongoose.model('Offer').deleteMany({ post: post._id });
+    await Offer.deleteMany({ post: post._id });
 
     // delete images from Cloudinary if stored there
-    for (const img of post.images) await cloudinary.uploader.destroy(img.public_id);
+    for (const img of post.images) await cloudinaryV2.uploader.destroy(img.public_id);
 
     next();
 });
