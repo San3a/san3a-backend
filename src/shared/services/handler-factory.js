@@ -1,3 +1,4 @@
+import cloudinaryV2 from '#src/config/cloudinary.js';
 import ApiFeatures from '#src/shared/utils/api-features.js';
 import AppError from '#src/shared/utils/app-error.js';
 import { asyncHandler } from '#src/shared/utils/async-handler.js';
