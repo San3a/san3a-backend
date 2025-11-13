@@ -14,7 +14,12 @@ import {
     GET_SPECIFIC_TECHSERVICE,
 } from '#src/modules/tech-service/endpoints.js';
 
-export default [CREATE_OFFER, GET_ALL_OFFERS, GET_OFFER, UPDATE_OFFER, DELETE_OFFER
+export default [
+    CREATE_OFFER,
+    GET_ALL_OFFERS,
+    GET_OFFER,
+    UPDATE_OFFER,
+    DELETE_OFFER,
     CREATE_TECHSERVICE,
     UPDATE_TECHSERVICE,
     DELETE_TECHSERVICE,

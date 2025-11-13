@@ -32,7 +32,6 @@ import express from 'express';
 import offerRoutes from '../offer/offer.routes.js';
 import { upload } from '#src/shared/utils/upload.js';
 import { handleImageCreate } from '#src/shared/middlewares/handleImageCreate.js';
-import { handleImageUpdate } from '#src/shared/middlewares/handleImageUpdate.js';
 
 const router = express.Router({ mergeParams: true });
 
