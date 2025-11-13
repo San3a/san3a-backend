@@ -39,6 +39,18 @@ export const initSocketServer = (server) => {
                     await message.populate('author', 'name email image')
                 );
             });
+            socket.on('unsendMessage', async ({ messageId, conversationId }) => {
+                try {
+                    const message = await Message.findById(messageId);
+                    if (!message) return;
+
+                    await message.deleteOne();
+
+                    io.to(conversationId).emit('messageDeleted', { messageId });
+                } catch (err) {
+                    console.error('Failed to unsend message:', err);
+                }
+            });
 
             socket.on('disconnect', () => console.log('User disconnected:', socket.id));
         });
