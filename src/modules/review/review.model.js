@@ -30,6 +30,7 @@ const reviewSchema = new Schema(
         },
     },
     {
+        timestamps: true,
         toJSON: { virtuals: true },
         toObject: { virtuals: true },
     }
