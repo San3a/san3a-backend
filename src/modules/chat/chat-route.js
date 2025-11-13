@@ -14,31 +14,30 @@ router.get('/messages/:conversationId', chatController.getMessages);
 router.post('/messages', chatController.sendMessage);
 
 // Upload images to conversation
+import Message from './models/message-model.js';
+
 router.post(
     '/:conversationId/upload',
     upload.array('images', 10),
-    handleImageCreate,
+    handleImageCreate(Message),
     async (req, res) => {
         try {
             const { conversationId } = req.params;
             const { userId } = req.body;
 
-            if (!req.files || req.files.length === 0) {
-                return res.status(400).json({ message: 'No files uploaded' });
+            if (!req.body.images || req.body.images.length === 0) {
+                return res.status(400).json({ message: 'No images processed' });
             }
 
             const createdMessages = [];
 
-            for (const file of req.files) {
-                const imageUrl = file.url;
-
+            for (const image of req.body.images) {
                 const message = await chatController.sendMessage({
                     conversationId,
                     author: userId,
-                    content: imageUrl,
+                    content: image.url,
                     type: 'image',
                 });
-
                 createdMessages.push(message);
             }
 
