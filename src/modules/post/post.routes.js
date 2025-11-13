@@ -29,13 +29,23 @@ import Post from '#src/modules/post/post.model.js';
 import { isAuthorized } from '#src/shared/middlewares/authorization.middleware.js';
 import restrictToOwner from '#src/shared/middlewares/check-owner.middleware.js';
 import express from 'express';
+import { upload } from '#src/shared/utils/upload.js';
+import { handleImageCreate } from '#src/shared/middlewares/handleImageCreate.js';
+import { handleImageUpdate } from '#src/shared/middlewares/handleImageUpdate.js';
 
 const router = express.Router({ mergeParams: true });
 
 router
     .route('/')
     .get(isAuthorized(GET_ALL_POSTS), getAllPosts)
-    .post(isAuthorized(CREATE_POST), validateCreatePost, setPostBody, createPost);
+    .post(
+        isAuthorized(CREATE_POST),
+        upload.array('images', 10),
+        setPostBody,
+        validateCreatePost,
+        handleImageCreate(Post),
+        createPost
+    );
 
 router.get('/me', isAuthorized(GET_USER_POSTS), setUserIdToParams, getUserPosts);
 router
@@ -44,7 +54,9 @@ router
     .patch(
         isAuthorized(UPDATE_POST),
         restrictToOwner(Post, 'user', "You don't have the permission to update this post"),
+        upload.array('images'),
         validateUpdatePost,
+        handleImageUpdate(Post),
         updatePost
     )
     .delete(

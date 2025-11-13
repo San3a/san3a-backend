@@ -1,8 +1,7 @@
-import AppError from '#src/shared/utils/app-error.js.js.js';
+import AppError from '#src/shared/utils/app-error.js';
 import jwt from 'jsonwebtoken';
 import rbac from '#src/shared/rbac/rbac.js';
 import { StatusCodes } from 'http-status-codes';
-import User from '#src/modules/user/user.model.js';
 import { asyncHandler } from '#src/shared/utils/async-handler.js';
 import User from '#src/modules/user/user.model.js';
 
