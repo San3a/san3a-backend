@@ -52,6 +52,10 @@ export const initSocketServer = (server) => {
                 }
             });
 
+            socket.on('typing', ({ conversationId, userId }) => {
+                socket.to(conversationId).emit('typing', { userId });
+            });
+
             socket.on('disconnect', () => console.log('User disconnected:', socket.id));
         });
 
