@@ -1,3 +1,4 @@
+import { validate } from '#src/shared/middlewares/validation.middleware.js';
 import joi from 'joi';
 
 const createOfferSchema = joi.object({
@@ -11,15 +12,6 @@ const updateOfferSchema = joi
         message: joi.string().label('Message'),
     })
     .min(1);
-
-const validate = (schema) => (req, res, next) => {
-    const { error } = schema.validate(req.body, { abortEarly: false });
-    if (error) {
-        const errors = error.details.map((d) => d.message);
-        return res.status(400).json({ status: 'fail', errors });
-    }
-    next();
-};
 
 export const validateCreateOffer = validate(createOfferSchema);
 export const validateUpdateOffer = validate(updateOfferSchema);
