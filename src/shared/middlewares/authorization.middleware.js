@@ -19,7 +19,6 @@ export const isAuthorized = (endpoint) =>
                     )
                 );
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            const decoded = jwt.verify(token, process.env.JWT_SECRET);
             // check if user exists on db
             const user = await User.findOne({ _id: decoded.id });
             if (!user) next(new AppError('User not found', StatusCodes.UNAUTHORIZED));
