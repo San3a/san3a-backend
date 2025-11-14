@@ -133,4 +133,24 @@ export const updatePassword = asyncHandler(async (req, res, next) => {
     createSendToken(user, StatusCodes.OK, res);
 });
 
-export default { signup, login, forgotPassword, resetPassword, updatePassword };
+// NEW: one common callback for Google & GitHub
+export const socialLoginCallback = (req, res) => {
+    // req.user is set by passport strategies
+    if (!req.user) {
+        return res
+            .status(StatusCodes.UNAUTHORIZED)
+            .json({ status: 'fail', message: 'Authentication failed' });
+    }
+
+    // reuse your normal JWT logic
+    createSendToken(req.user, StatusCodes.OK, res);
+};
+
+export default {
+    signup,
+    login,
+    forgotPassword,
+    resetPassword,
+    updatePassword,
+    socialLoginCallback,
+};
