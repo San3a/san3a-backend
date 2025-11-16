@@ -8,16 +8,6 @@ const createPostSchema = Joi.object({
     title: Joi.string().min(5).max(100).required().label('Title'),
 
     description: Joi.string().min(5).required().label('Description'),
-
-    images: Joi.array()
-        .items(
-            Joi.object({
-                public_id: Joi.string().required(),
-                url: Joi.string().uri().required(),
-            })
-        )
-        .label('Images'),
-
     tags: Joi.array().items(Joi.string().lowercase().trim()).max(10).label('Tags'),
 
     category: Joi.string()
@@ -43,12 +33,6 @@ const createPostSchema = Joi.object({
 const updatePostSchema = Joi.object({
     title: Joi.string().min(5).max(100),
     description: Joi.string().min(5),
-    images: Joi.array().items(
-        Joi.object({
-            public_id: Joi.string().required(),
-            url: Joi.string().uri().required(),
-        })
-    ),
     tags: Joi.array().items(Joi.string().lowercase().trim()).max(10),
     category: Joi.string().valid(...Object.values(TechnicianRoles)),
     location: Joi.object({
