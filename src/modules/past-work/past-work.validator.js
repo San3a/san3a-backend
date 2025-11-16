@@ -31,11 +31,11 @@ export const createPastWorkSchema = Joi.object({
         'any.required': 'Images are required',
     }),
 
-    owner: Joi.string().hex().length(24).required().messages({ // Added .hex().length(24)
-        'any.required': 'owner id is required',
-        'string.empty': 'owner id is required',
-        'string.hex': 'owner id must be a valid MongoDB ID',
-        'string.length': 'owner id must be a valid MongoDB ID',
+    userId: Joi.string().hex().length(24).required().messages({
+        'any.required': 'userId id is required',
+        'string.empty': 'userId id is required',
+        'string.hex': 'userId id must be a valid MongoDB ID',
+        'string.length': 'userId id must be a valid MongoDB ID',
     }),
 
     location: Joi.object({
@@ -90,14 +90,14 @@ export const updatePastWorkSchema = Joi.object({
         'any.required': 'Images are required',
     }),
 
-    // Owner should typically NOT be updatable, but if it is, it must be optional
-    owner: Joi.string()
+    // userId should typically NOT be updatable, but if it is, it must be optional
+    userId: Joi.string()
         .hex()
         .length(24)
         .optional()
         .messages({
-            'string.hex': 'owner id must be a valid MongoDB ID',
-            'string.length': 'owner id must be a valid MongoDB ID',
+            'string.hex': 'userId id must be a valid MongoDB ID',
+            'string.length': 'userId id must be a valid MongoDB ID',
         }),
 
     location: Joi.object({

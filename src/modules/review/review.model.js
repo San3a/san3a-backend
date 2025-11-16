@@ -10,10 +10,6 @@ const reviewSchema = new Schema(
             min: [0, "Product Rate can't be lower than 0"],
             max: [5, "Product Rate can't be greater than 5"],
         },
-        createdAt: {
-            type: Date,
-            default: Date.now,
-        },
         review: {
             type: String,
             required: [true, 'Review must have a review'],

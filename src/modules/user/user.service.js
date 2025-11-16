@@ -3,6 +3,7 @@ import APIFeatures from '#src/shared/utils/api-features.js';
 import asyncHandler from 'express-async-handler';
 import AppError from '#src/shared/utils/app-error.js';
 import { StatusCodes } from 'http-status-codes';
+import PastWork from '#src/modules/past-work/past-work.model.js';
 
 // utils
 const filterObj = (obj, ...allowedFields) => {
@@ -58,9 +59,8 @@ export const updateMe = asyncHandler(async (req, res, next) => {
             )
         );
     }
-
     // 2) Allowlisted fields
-    const filteredBody = filterObj(req.body, 'name', 'email');
+    const filteredBody = filterObj(req.body, 'name', 'email', 'image');
 
     // 3) Update doc
     const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
@@ -94,4 +94,18 @@ export const deleteMe = asyncHandler(async (req, res, next) => {
     });
 });
 
-export default { getAllUsers, getUserById, updateMe, deleteMe };
+export const getMyPastWork = asyncHandler(async(req, res, next) => {
+    const { id } = req.params;
+
+    const myPastWork = await PastWork.find({
+        userId: id
+    });
+
+
+    res.status(StatusCodes.OK).json({
+        status: 'success',
+        data: myPastWork,
+    });
+})
+
+export default { getAllUsers, getUserById, updateMe, deleteMe, getMyPastWork };
