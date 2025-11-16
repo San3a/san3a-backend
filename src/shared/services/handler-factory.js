@@ -32,7 +32,6 @@ export const updateOne = (Model) =>
 
 export const createOne = (Model) =>
     asyncHandler(async (req, res, next) => {
-        console.log(req.body);
         const doc = await Model.create(req.body);
         res.status(StatusCodes.CREATED).json({
             status: SUCCESS,

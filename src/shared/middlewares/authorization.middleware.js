@@ -7,7 +7,6 @@ import User from '#src/modules/user/user.model.js';
 
 export const isAuthorized = (endpoint) =>
     asyncHandler(async (req, res, next) => {
-        console.log('req.headers.authorization', req.headers.authorization);
         if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
             const token = req.headers.authorization.split(' ')[1];
             if (!token)
@@ -33,8 +32,6 @@ export const isAuthorized = (endpoint) =>
                     );
             }
             req.user = user;
-            console.log('req.user', req.user);
-            console.log('endpoint', endpoint);
             const isAuth = await rbac.can(user.role, endpoint);
             if (!isAuth) next(new AppError('Unauthorized', StatusCodes.FORBIDDEN));
             next();

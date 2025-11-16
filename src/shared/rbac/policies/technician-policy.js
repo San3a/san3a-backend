@@ -4,6 +4,7 @@ import {
     DELETE_TECHSERVICE,
     GET_ALL_TECHSERVICES,
     GET_SPECIFIC_TECHSERVICE,
+    ADD_TECHSERVICE_AVAILABILTY,
 } from '#src/modules/tech-service/endpoints.js';
 
 export default [
@@ -12,4 +13,5 @@ export default [
     DELETE_TECHSERVICE,
     GET_ALL_TECHSERVICES,
     GET_SPECIFIC_TECHSERVICE,
+    ADD_TECHSERVICE_AVAILABILTY,
 ];
