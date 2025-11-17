@@ -18,7 +18,11 @@ import {
     updatePostStatus,
     updateSelectedOffer,
 } from '#src/modules/post/post.controller.js';
-import { setPostBody, setUserIdToParams } from '#src/modules/post/post.middleware.js';
+import {
+    handleExistingPostImages,
+    setPostBody,
+    setUserIdToParams,
+} from '#src/modules/post/post.middleware.js';
 import {
     validateCreatePost,
     validateUpdatePost,
@@ -36,7 +40,7 @@ import { handleImageUpdate } from '#src/shared/middlewares/handleImageUpdate.js'
 
 const router = express.Router({ mergeParams: true });
 
-router.use('/:id/offers', offerRoutes);
+router.use('/:postId/offers', offerRoutes);
 
 router
     .route('/')
@@ -45,8 +49,8 @@ router
         isAuthorized(CREATE_POST),
         upload.array('images', 10),
         setPostBody,
-        validateCreatePost,
         handleImageCreate(Post),
+        validateCreatePost,
         createPost
     );
 
@@ -58,8 +62,9 @@ router
         isAuthorized(UPDATE_POST),
         restrictToOwner(Post, 'user', "You don't have the permission to update this post"),
         upload.array('images'),
-        validateUpdatePost,
         handleImageUpdate(Post),
+        handleExistingPostImages,
+        validateUpdatePost,
         updatePost
     )
     .delete(

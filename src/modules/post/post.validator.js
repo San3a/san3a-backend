@@ -4,9 +4,16 @@ import { validate } from '#src/shared/middlewares/validation.middleware.js';
 
 const createPostSchema = Joi.object({
     user: Joi.string().hex().length(24).required().label('User ID'),
-
+    images: Joi.array()
+        .items(
+            Joi.object({
+                public_id: Joi.string().required(),
+                url: Joi.string().uri().required(),
+            })
+        )
+        .required()
+        .label('Images'),
     title: Joi.string().min(5).max(100).required().label('Title'),
-
     description: Joi.string().min(5).required().label('Description'),
     tags: Joi.array().items(Joi.string().lowercase().trim()).max(10).label('Tags'),
 
@@ -33,6 +40,16 @@ const createPostSchema = Joi.object({
 const updatePostSchema = Joi.object({
     title: Joi.string().min(5).max(100),
     description: Joi.string().min(5),
+    images: Joi.array()
+        .items(
+            Joi.object({
+                public_id: Joi.string().required(),
+                url: Joi.string().uri().required(),
+                _id: Joi.alternatives().try(Joi.string(), Joi.object()).optional(),
+            }).unknown(true)
+        )
+        .optional(),
+    existingImages: Joi.array().items(Joi.string()).optional(),
     tags: Joi.array().items(Joi.string().lowercase().trim()).max(10),
     category: Joi.string().valid(...Object.values(TechnicianRoles)),
     location: Joi.object({
@@ -42,6 +59,18 @@ const updatePostSchema = Joi.object({
     }),
 })
     .min(1)
+    .custom((value, helpers) => {
+        const hasNewImages = value.images && value.images.length > 0;
+        const hasExistingImages = value.existingImages && value.existingImages.length > 0;
+
+        if (!hasNewImages && !hasExistingImages) {
+            return helpers.error('any.custom', {
+                message: 'At least one image is required (either new images or existing images)',
+            });
+        }
+
+        return value;
+    })
     .unknown(false);
 
 const updatePostStatusSchema = Joi.object({

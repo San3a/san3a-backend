@@ -21,7 +21,6 @@ export const handleImageCreate = (Model) =>
                 });
             })
         );
-
         req.body.images = images;
         next();
     });

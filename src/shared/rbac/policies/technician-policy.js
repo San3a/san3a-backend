@@ -13,11 +13,10 @@ import {
     DELETE_TECHSERVICE,
     GET_ALL_TECHSERVICES,
     GET_SPECIFIC_TECHSERVICE,
+    ADD_TECHSERVICE_AVAILABILTY,
 } from '#src/modules/tech-service/endpoints.js';
 
-import {
-    CREATE_PASTWORK
-} from '#src/modules/past-work/endpoints.js'
+import { CREATE_PASTWORK } from '#src/modules/past-work/endpoints.js';
 import { DELETE_USER, UPDATE_USER, GETPASTWORK } from '#src/modules/user/endpoints.js';
 
 export default [
@@ -31,6 +30,7 @@ export default [
     DELETE_TECHSERVICE,
     GET_ALL_TECHSERVICES,
     GET_SPECIFIC_TECHSERVICE,
+    ADD_TECHSERVICE_AVAILABILTY,
     GET_ALL_POSTS,
     GET_USER_POSTS,
     GET_POST,
@@ -39,5 +39,5 @@ export default [
     UPDATE_USER,
     DELETE_USER,
 
-    CREATE_PASTWORK
+    CREATE_PASTWORK,
 ];
