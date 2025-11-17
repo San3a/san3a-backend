@@ -18,7 +18,11 @@ import {
     updatePostStatus,
     updateSelectedOffer,
 } from '#src/modules/post/post.controller.js';
-import { setPostBody, setUserIdToParams } from '#src/modules/post/post.middleware.js';
+import {
+    handleExistingPostImages,
+    setPostBody,
+    setUserIdToParams,
+} from '#src/modules/post/post.middleware.js';
 import {
     validateCreatePost,
     validateUpdatePost,
@@ -59,6 +63,7 @@ router
         restrictToOwner(Post, 'user', "You don't have the permission to update this post"),
         upload.array('images'),
         handleImageUpdate(Post),
+        handleExistingPostImages,
         validateUpdatePost,
         updatePost
     )

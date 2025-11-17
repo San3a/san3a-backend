@@ -4,6 +4,7 @@ import asyncHandler from 'express-async-handler';
 import AppError from '#src/shared/utils/app-error.js';
 import { StatusCodes } from 'http-status-codes';
 import PastWork from '#src/modules/past-work/past-work.model.js';
+import Review from '#src/modules/review/review.model.js';
 
 // utils
 const filterObj = (obj, ...allowedFields) => {
@@ -105,6 +106,20 @@ export const getMyPastWork = asyncHandler(async(req, res, next) => {
     res.status(StatusCodes.OK).json({
         status: 'success',
         data: myPastWork,
+    });
+})
+
+export const getMyReviews = asyncHandler(async(req, res, next) => {
+    const { id } = req.params;
+
+    const myReviews = await Review.find({
+        user: id
+    });
+
+
+    res.status(StatusCodes.OK).json({
+        status: 'success',
+        data: myReviews,
     });
 })
 
