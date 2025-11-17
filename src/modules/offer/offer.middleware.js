@@ -3,10 +3,9 @@ import { StatusCodes } from 'http-status-codes';
 import AppError from '#src/shared/utils/app-error.js';
 import Post from '../post/post.model.js';
 import Offer from './offer.model.js';
-import mongoose from 'mongoose';
 
 export const setOfferBody = (req, res, next) => {
-    req.body.post = req.params.id;
+    req.body.post = req.params.postId;
     req.body.technician = req.user._id;
     next();
 };
@@ -22,6 +21,7 @@ export const isPostAvailable = asyncHandler(async (req, res, next) => {
 
 export const isOfferOnPost = asyncHandler(async (req, res, next) => {
     const { postId } = req.params;
+    console.log(req.params);
     const doesOfferExist = await Offer.exists({ _id: req.params.id, post: postId });
     if (!doesOfferExist) {
         return next(

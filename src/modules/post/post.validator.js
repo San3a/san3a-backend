@@ -4,9 +4,8 @@ import { validate } from '#src/shared/middlewares/validation.middleware.js';
 
 const createPostSchema = Joi.object({
     user: Joi.string().hex().length(24).required().label('User ID'),
-
+    images: Joi.array().min(1).required().label('Images'),
     title: Joi.string().min(5).max(100).required().label('Title'),
-
     description: Joi.string().min(5).required().label('Description'),
     tags: Joi.array().items(Joi.string().lowercase().trim()).max(10).label('Tags'),
 
@@ -33,6 +32,7 @@ const createPostSchema = Joi.object({
 const updatePostSchema = Joi.object({
     title: Joi.string().min(5).max(100),
     description: Joi.string().min(5),
+    images: Joi.any().optional(),
     tags: Joi.array().items(Joi.string().lowercase().trim()).max(10),
     category: Joi.string().valid(...Object.values(TechnicianRoles)),
     location: Joi.object({

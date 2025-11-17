@@ -36,7 +36,7 @@ import { handleImageUpdate } from '#src/shared/middlewares/handleImageUpdate.js'
 
 const router = express.Router({ mergeParams: true });
 
-router.use('/:id/offers', offerRoutes);
+router.use('/:postId/offers', offerRoutes);
 
 router
     .route('/')
@@ -45,8 +45,8 @@ router
         isAuthorized(CREATE_POST),
         upload.array('images', 10),
         setPostBody,
-        validateCreatePost,
         handleImageCreate(Post),
+        validateCreatePost,
         createPost
     );
 
@@ -58,8 +58,8 @@ router
         isAuthorized(UPDATE_POST),
         restrictToOwner(Post, 'user', "You don't have the permission to update this post"),
         upload.array('images'),
-        validateUpdatePost,
         handleImageUpdate(Post),
+        validateUpdatePost,
         updatePost
     )
     .delete(
