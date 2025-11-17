@@ -1,4 +1,5 @@
 import {
+    addAvailabiltySlots,
     createTechServiceHandler,
     deleteTechServiceHandler,
     getAllTechServicesHandler,
@@ -9,6 +10,7 @@ import {
     CREATE_TECHSERVICE,
     UPDATE_TECHSERVICE,
     DELETE_TECHSERVICE,
+    ADD_TECHSERVICE_AVAILABILTY,
 } from '#src/modules/tech-service/endpoints.js';
 import { isAuthorized } from '#src/shared/middlewares/authorization.middleware.js';
 import express from 'express';
@@ -18,7 +20,10 @@ import { handleImageUpdate } from '#src/shared/middlewares/handleImageUpdate.js'
 import TechService from '#src/modules/tech-service/tech-service.model.js';
 import restrictToOwner from '#src/shared/middlewares/check-owner.middleware.js';
 import { validate } from '#src/shared/middlewares/validation.middleware.js';
-import { createTechServiceSchema } from '#src/modules/tech-service/tech-service.validator.js';
+import {
+    addAvailabilitySchema,
+    createTechServiceSchema,
+} from '#src/modules/tech-service/tech-service.validator.js';
 
 const router = express.Router();
 router
@@ -45,6 +50,15 @@ router
         isAuthorized(DELETE_TECHSERVICE),
         restrictToOwner(TechService),
         deleteTechServiceHandler
+    );
+
+router
+    .route('/:id/availabity')
+    .post(
+        isAuthorized(ADD_TECHSERVICE_AVAILABILTY),
+        restrictToOwner(TechService),
+        validate(addAvailabilitySchema),
+        addAvailabiltySlots
     );
 
 export default router;

@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import dotenv from 'dotenv';
 import compression from 'compression';
 import hpp from 'hpp';
 import { xss } from 'express-xss-sanitizer';
@@ -10,8 +9,6 @@ import limiter from '#src/shared/middlewares/rate-limiter.middleware.js';
 import { unhandledRoutesHandler } from '#src/shared/middlewares/unhandled-routes.middleware.js';
 import mountRoutes from '#src/modules/routes.js';
 import globalErrorHandler from '#src/shared/middlewares/global-error-handler.middleware.js';
-
-dotenv.config();
 
 const app = express();
 
@@ -33,6 +30,7 @@ app.options(
         credentials: true,
     })
 );
+app.set('query parser', 'extended');
 
 app.use(helmet());
 

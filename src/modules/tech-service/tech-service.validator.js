@@ -1,11 +1,6 @@
 import Joi from 'joi';
 
 export const createTechServiceSchema = Joi.object({
-    user: Joi.string().required().messages({
-        'any.required': 'ServiceOwner id is required',
-        'string.empty': 'ServiceOwner id is required',
-    }),
-
     title: Joi.string().min(3).max(30).required().messages({
         'string.empty': 'Service name is required!',
         'string.min': 'Service name is too short, it must be >= 3 characters',
@@ -59,3 +54,47 @@ export const createTechServiceSchema = Joi.object({
 });
 
 export const updateTechServiceSchema = Joi.object({});
+
+export const addAvailabilitySchema = Joi.object({
+    availabity: Joi.array()
+        .items(
+            Joi.object({
+                day: Joi.date().required().messages({
+                    'any.required': 'Day is required',
+                    'date.base': 'Day must be a valid date',
+                }),
+
+                slots: Joi.array()
+                    .items(
+                        Joi.object({
+                            start: Joi.string()
+                                .pattern(/^\d{2}:\d{2}$/)
+                                .required()
+                                .messages({
+                                    'string.pattern.base': 'Start time must be in HH:MM format',
+                                    'any.required': 'Start time is required',
+                                }),
+
+                            end: Joi.string()
+                                .pattern(/^\d{2}:\d{2}$/)
+                                .required()
+                                .messages({
+                                    'string.pattern.base': 'End time must be in HH:MM format',
+                                    'any.required': 'End time is required',
+                                }),
+                        })
+                    )
+                    .required()
+                    .messages({
+                        'any.required': 'Slots are required',
+                        'array.base': 'Slots must be an array',
+                    }),
+            })
+        )
+        .min(1)
+        .required()
+        .messages({
+            'array.min': 'You must provide at least one availability entry',
+            'any.required': 'availabity field is required',
+        }),
+});
