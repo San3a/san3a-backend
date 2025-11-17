@@ -13,23 +13,14 @@ import { CLIENT_URL } from '#src/config/config.js';
 
 const app = express();
 
-// Allow only your frontend origin
 app.use(
-    cors({
-        origin: CLIENT_URL,
-        methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-        credentials: true, // if you use cookies or auth headers
-    })
-);
-
-app.options(
-    '*all',
     cors({
         origin: CLIENT_URL,
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
         credentials: true,
     })
 );
+
 app.set('query parser', 'extended');
 
 app.use(helmet());
