@@ -14,6 +14,8 @@ import { CLIENT_URL } from '#src/config/config.js';
 
 const app = express();
 
+app.set('query parser', 'extended');
+
 app.use(
     cors({
         origin: CLIENT_URL,
@@ -21,7 +23,6 @@ app.use(
     })
 );
 app.options('*all', cors());
-
 app.use(helmet());
 
 app.use(compression());

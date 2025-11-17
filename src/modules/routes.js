@@ -7,7 +7,7 @@ import authRoutes from '#src/modules/authentication/auth.route.js';
 import userRoutes from '#src/modules/user/user.route.js';
 const mountRoutes = (app) => {
     app.use('/api/past-work', pastWorkRouter);
-    app.use('/api/tech-service', techSerivceRouter);
+    app.use('/api/tech-services', techSerivceRouter);
     app.use('/api/categories', categoryRouter);
     app.use('/api/reviews', reviewsRouter);
     app.use('/api/auth', authRoutes);

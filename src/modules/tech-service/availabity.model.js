@@ -11,6 +11,10 @@ const timeRangeSchmea = new mongoose.Schema({
         required: true,
         match: [/^\d{2}:\d{2}$/, 'invalid end date format'],
     },
+    isBooked: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const availabitySchema = new mongoose.Schema({

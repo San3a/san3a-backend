@@ -74,7 +74,6 @@ export const getAll = (Model, populateOptions = null, nestedFilter = {}) =>
             .sort()
             .limitFields()
             .paginate();
-
         let { query } = features;
         if (populateOptions) query = query.populate(populateOptions);
 
