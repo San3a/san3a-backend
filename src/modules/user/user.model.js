@@ -57,7 +57,7 @@ const userSchema = new mongoose.Schema(
         },
         image: {
             public_id: String,
-            url:  String,
+            url: String,
         },
         address: pointSchema,
         rating: {

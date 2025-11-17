@@ -9,10 +9,12 @@ const categorySchema = new mongoose.Schema(
         description: {
             type: String,
         },
-        icon: {
-            url: { type: String, required: true },
-            public_id: { type: String },
-        },
+        images: [
+            {
+                url: { type: String, required: true },
+                public_id: { type: String },
+            },
+        ],
     },
     {
         timestamps: true,
