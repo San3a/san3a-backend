@@ -20,13 +20,23 @@ export const handleImageUpdate = (Model) =>
                 })
             )
             .then(async () => {
-                const item = await Model.findById(req.params.id);
-                if (!item) {
-                    return next(new AppError(`No ${Model.modelName} found with that ID`, 404));
+                if(Model.modelName === 'User') {
+                    const user = await Model.findById(req.user.id);
+                    if (!user) {
+                        return next(new AppError(`No ${Model.modelName} found with that ID`, 404));
+                    }
+                    
+                    req.body.image = images?.[0];
                 }
-
-                updatedImages = [...item.images, ...images];
-                req.body.images = updatedImages;
+                else {
+                    const item = await Model.findById(req.params.id);
+                    if (!item) {
+                        return next(new AppError(`No ${Model.modelName} found with that ID`, 404));
+                    }
+                    
+                    updatedImages = [...item.images, ...images];
+                    req.body.images = updatedImages;
+                }
             });
         }
     next();

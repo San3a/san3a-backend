@@ -1,0 +1,5 @@
+const CREATE_PASTWORK = 'post:CREATE_PASTWORK';
+
+export {
+    CREATE_PASTWORK
+};

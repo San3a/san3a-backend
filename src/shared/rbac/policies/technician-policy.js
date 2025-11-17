@@ -15,6 +15,10 @@ import {
     GET_SPECIFIC_TECHSERVICE,
 } from '#src/modules/tech-service/endpoints.js';
 
+import {
+    CREATE_PASTWORK
+} from '#src/modules/past-work/endpoints.js'
+
 export default [
     CREATE_OFFER,
     GET_ALL_OFFERS,
@@ -29,4 +33,6 @@ export default [
     GET_ALL_POSTS,
     GET_USER_POSTS,
     GET_POST,
+
+    CREATE_PASTWORK
 ];
