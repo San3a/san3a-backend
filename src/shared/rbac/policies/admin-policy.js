@@ -12,7 +12,8 @@ import { GET_ALL_POSTS, GET_POST, DELETE_POST } from '#src/modules/post/endpoint
 export default [
     CREATE_CATEGORY,
     UPDATE_CATEGORY,
-    DELETE_CATEGORYGET_ALL_POSTS,
+    DELETE_CATEGORY,
+    GET_ALL_POSTS,
     GET_POST,
     DELETE_POST,
     GET_ALL_OFFERS,
