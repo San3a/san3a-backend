@@ -57,7 +57,7 @@ const userSchema = new mongoose.Schema(
         },
         image: {
             public_id: String,
-            url:  String,
+            url: String,
         },
         address: pointSchema,
         rating: {
@@ -100,7 +100,6 @@ userSchema.methods.correctPassword = async function (candidatePassword, userPass
 userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
     if (this.passwordChangedAt) {
         const changedTimestamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
-        console.log(changedTimestamp, JWTTimestamp);
         return JWTTimestamp < changedTimestamp;
     }
 
@@ -114,8 +113,6 @@ userSchema.methods.createPasswordResetToken = function () {
     this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
 
     this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
-
-    console.log(this.passwordResetExpires, resetToken);
 
     return resetToken;
 };

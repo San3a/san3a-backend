@@ -13,3 +13,4 @@ export const { JWT_SECRET } = process.env;
 export const { CLOUD_NAME } = process.env;
 export const { API_KEY } = process.env;
 export const { API_SECRET } = process.env;
+export const { CLIENT_URL } = process.env;

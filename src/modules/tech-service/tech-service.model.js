@@ -5,6 +5,7 @@ const techServiceSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: [true, 'ServiceOwner id is required'],
+        unique: true,
     },
     title: {
         type: String,
@@ -52,6 +53,12 @@ const techServiceSchema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
+    availabity: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Availabity',
+        },
+    ],
 });
 techServiceSchema.pre(/^find/, function (next) {
     this.populate({ path: 'category' });
