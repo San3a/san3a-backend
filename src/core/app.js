@@ -9,23 +9,23 @@ import limiter from '#src/shared/middlewares/rate-limiter.middleware.js';
 import { unhandledRoutesHandler } from '#src/shared/middlewares/unhandled-routes.middleware.js';
 import mountRoutes from '#src/modules/routes.js';
 import globalErrorHandler from '#src/shared/middlewares/global-error-handler.middleware.js';
+import { CLIENT_URL } from '#src/config/config.js';
 
 const app = express();
 
 // Allow only your frontend origin
 app.use(
     cors({
-        origin: 'http://localhost:5173',
+        origin: CLIENT_URL,
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
         credentials: true, // if you use cookies or auth headers
     })
 );
 
-// Optional: handle preflight requests for all routes
 app.options(
     '*all',
     cors({
-        origin: 'http://localhost:5173',
+        origin: CLIENT_URL,
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
         credentials: true,
     })
