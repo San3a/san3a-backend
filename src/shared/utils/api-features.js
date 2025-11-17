@@ -41,7 +41,7 @@ class ApiFeatures {
          */
 
         const isObjectIdLike = (str) => /^[0-9a-fA-F]{24}$/.test(str);
-
+        const isNumeric = (v) => typeof v === 'string' && v.trim() !== '' && !isNaN(Number(v));
         Object.keys(parsedQuery).forEach((key) => {
             const value = parsedQuery[key];
             // Handle operator-based filters like ?price[gt]=20 → { price: { $gt: 20 } }
@@ -52,16 +52,21 @@ class ApiFeatures {
                     }
                 });
                 // Handle direct numeric filters like ?rating=5 → { rating: 5 }
-            } else if (!Number.isNaN(value)) {
+            } else if (isNumeric(value)) {
                 parsedQuery[key] = Number(value);
                 // Handle text filters like ?name=chair → { name: /chair/i }
             } else if (typeof value === 'string') {
                 if (!isObjectIdLike(value)) {
-                    parsedQuery[key] = new RegExp(value, 'i');
+                    // Non empty, non-objectId string becomes a regex
+                    if (value.trim() !== '') {
+                        parsedQuery[key] = new RegExp(value, 'i');
+                    } else {
+                        // Empty string → remove filter
+                        delete parsedQuery[key];
+                    }
                 }
             }
         });
-
         this.query = this.query.find(parsedQuery);
         return this;
     }

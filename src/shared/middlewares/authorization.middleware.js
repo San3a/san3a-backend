@@ -1,8 +1,9 @@
-import AppError from '#src/shared/utils/app-error';
-import { asyncHandler } from '#src/shared/utils/async-handler';
+import AppError from '#src/shared/utils/app-error.js';
 import jwt from 'jsonwebtoken';
-import rbac from '#src/shared/rbac/rbac';
+import rbac from '#src/shared/rbac/rbac.js';
 import { StatusCodes } from 'http-status-codes';
+import { asyncHandler } from '#src/shared/utils/async-handler.js';
+import User from '#src/modules/user/user.model.js';
 
 export const isAuthorized = (endpoint) =>
     asyncHandler(async (req, res, next) => {
@@ -15,11 +16,9 @@ export const isAuthorized = (endpoint) =>
                         StatusCodes.UNAUTHORIZED
                     )
                 );
-            const decoded = jwt.verify(token, process.env.SECRET_KEY);
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
             // check if user exists on db
-            //! uncomment this when user is available
-            // const user = await User.findOne({ _id: decoded.id });
-            const user = {};
+            const user = await User.findOne({ _id: decoded.id });
             if (!user) next(new AppError('User not found', StatusCodes.UNAUTHORIZED));
             // check if user changed his password after init the token
             if (user.passwordChangedAt) {

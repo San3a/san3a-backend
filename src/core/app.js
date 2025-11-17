@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import dotenv from 'dotenv';
 import compression from 'compression';
 import hpp from 'hpp';
 import { xss } from 'express-xss-sanitizer';
@@ -11,12 +10,27 @@ import { unhandledRoutesHandler } from '#src/shared/middlewares/unhandled-routes
 import mountRoutes from '#src/modules/routes.js';
 import globalErrorHandler from '#src/shared/middlewares/global-error-handler.middleware.js';
 
-dotenv.config();
-
 const app = express();
 
-app.use(cors());
-app.options('*all', cors());
+// Allow only your frontend origin
+app.use(
+    cors({
+        origin: 'http://localhost:5173',
+        methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+        credentials: true, // if you use cookies or auth headers
+    })
+);
+
+// Optional: handle preflight requests for all routes
+app.options(
+    '*all',
+    cors({
+        origin: 'http://localhost:5173',
+        methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+        credentials: true,
+    })
+);
+app.set('query parser', 'extended');
 
 app.use(helmet());
 
