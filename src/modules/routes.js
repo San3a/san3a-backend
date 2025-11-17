@@ -1,3 +1,5 @@
+import postRoutes from './post/post.routes.js';
+
 import pastWorkRouter from '#src/modules/past-work/past-work.routes.js';
 import techSerivceRouter from '#src/modules/tech-service/tech-service.routes.js';
 import categoryRouter from '#src/modules/category/category.routes.js';
@@ -11,6 +13,8 @@ const mountRoutes = (app) => {
     app.use('/api/tech-services', techSerivceRouter);
     app.use('/api/categories', categoryRouter);
     app.use('/api/reviews', reviewsRouter);
+    app.use('/api/posts', postRoutes);
+
     app.use('/api/auth', authRoutes);
     app.use('/api/users', userRoutes);
 

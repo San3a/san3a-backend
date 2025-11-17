@@ -28,10 +28,10 @@ const pastWorkSchema = new Schema({
             }
         }
     ],
-    owner: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: [true, 'Pastwork Must have an owner'],
+        required: [true, 'Pastwork Must have an owner (userId)'],
     },
     //TODO: Add category 
     location: pointSchema,
