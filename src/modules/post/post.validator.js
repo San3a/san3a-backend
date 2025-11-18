@@ -1,6 +1,7 @@
 import Joi from 'joi';
 import TechnicianRoles from '#src/shared/enums/technician-roles.js';
 import { validate } from '#src/shared/middlewares/validation.middleware.js';
+import objectId from '#src/shared/utils/joi-validators/validate-objectid.js';
 
 const createPostSchema = Joi.object({
     user: Joi.string().hex().length(24).required().label('User ID'),
@@ -17,10 +18,7 @@ const createPostSchema = Joi.object({
     description: Joi.string().min(5).required().label('Description'),
     tags: Joi.array().items(Joi.string().lowercase().trim()).max(10).label('Tags'),
 
-    category: Joi.string()
-        .valid(...Object.values(TechnicianRoles))
-        .required()
-        .label('Category'),
+    category: objectId('Category').label('Category'),
 
     location: Joi.object({
         type: Joi.string().valid('Point').required(),
