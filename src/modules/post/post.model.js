@@ -3,6 +3,7 @@ import pointSchema from '#src/shared/utils/point-schema.js';
 import cloudinaryV2 from '#src/config/cloudinary.js';
 import mongoose from 'mongoose';
 import Offer from '#src/modules/offer/offer.model.js';
+import Category from '#src/modules/category/category.model.js';
 
 const postSchema = new mongoose.Schema({
     user: {
@@ -46,9 +47,16 @@ const postSchema = new mongoose.Schema({
         validate: [(array) => array.length <= 10, 'Cannot have more than 10 tags'],
     },
     category: {
-        type: String,
-        enum: Object.values(TechnicianRoles),
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category',
         required: [true, 'Post must have a category'],
+        validate: {
+            validator: async function (value) {
+                const exists = await Category.exists({ _id: value });
+                return exists;
+            },
+            message: 'Invalid category ID. Category does not exist.',
+        },
     },
     location: {
         type: pointSchema,
@@ -90,10 +98,12 @@ postSchema.pre('findOneAndUpdate', function (next) {
 });
 
 postSchema.pre(/^find/, function (next) {
-    this.populate({ path: 'user', select: 'name image' }).populate({
-        path: 'selectedOffer',
-        select: 'price technician',
-    });
+    this.populate({ path: 'user', select: 'name image' })
+        .populate({
+            path: 'selectedOffer',
+            select: 'price technician',
+        })
+        .populate('category');
     next();
 });
 
