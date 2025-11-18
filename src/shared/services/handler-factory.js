@@ -69,6 +69,8 @@ export const getAll = (Model, populateOptions = null, nestedFilter = {}) =>
                 filter[fieldName] = req.params[paramName];
             }
         });
+        const total = await Model.countDocuments(filter);
+
         const features = new ApiFeatures(Model.find(filter), req.query)
             .filter()
             .sort()
@@ -78,10 +80,17 @@ export const getAll = (Model, populateOptions = null, nestedFilter = {}) =>
         if (populateOptions) query = query.populate(populateOptions);
 
         const docs = await query;
+        const page = req.query.page * 1 || 1;
+        const limit = req.query.limit * 1 || 100;
 
         res.status(StatusCodes.OK).json({
             status: SUCCESS,
+            total,
+            page,
+            limit,
+            totalPages: Math.ceil(total / limit),
             results: docs.length,
+            // This is called envelope
             data: docs,
         });
     });
