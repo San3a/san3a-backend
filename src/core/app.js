@@ -15,8 +15,18 @@ const app = express();
 
 app.use(
     cors({
-        origin: CLIENT_URL,
-        methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+        origin: 'http://localhost:5173',
+        methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
+        credentials: true, // if you use cookies or auth headers
+    })
+);
+
+// Optional: handle preflight requests for all routes
+app.options(
+    '*all',
+    cors({
+        origin: 'http://localhost:5173',
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         credentials: true,
     })
 );
