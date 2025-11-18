@@ -18,7 +18,7 @@ const mountRoutes = (app) => {
     app.use('/api/auth', authRoutes);
     app.use('/api/users', userRoutes);
     app.use('/api/chat', chatRoutes);
-    // app.use('/api/chatbot', chatbotRoutes);
+    app.use('/api/chatbot', chatbotRoutes);
     app.use('/api/admin', adminRoutes);
 };
 
