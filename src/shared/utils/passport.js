@@ -15,8 +15,6 @@ passport.use(
         },
         async (accessToken, refreshToken, profile, done) => {
             try {
-                const email = profile.emails?.[0]?.value;
-
                 let user = await User.findOne({
                     $or: [{ email }, { authProvider: 'google', authProviderId: profile.id }],
                 });
@@ -24,7 +22,7 @@ passport.use(
                 if (!user) {
                     user = await User.create({
                         name: profile.displayName || 'Google User',
-                        email,
+                        email:profile.emails?.[0]?.value,
                         authProvider: 'google',
                         authProviderId: profile.id,
                         image: {
@@ -63,7 +61,7 @@ passport.use(
                 if (!user) {
                     user = await User.create({
                         name: profile.displayName || profile.username || 'GitHub User',
-                        email,
+                        email:profile.emails?.[0]?.value,
                         authProvider: 'github',
                         authProviderId: profile.id,
                         image: {
