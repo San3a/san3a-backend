@@ -2,12 +2,14 @@ import {
     CREATE_OFFER,
     DELETE_OFFER,
     GET_ALL_OFFERS,
+    GET_DID_TECHNICIAN_ADD_OFFER_TO_POST,
     GET_OFFER,
     UPDATE_OFFER,
 } from '#src/modules/offer/endpoints.js';
 import {
     createOffer,
     deleteOffer,
+    didTechnicianMakeOffer,
     getAllOffers,
     getOffer,
     updateOffer,
@@ -31,6 +33,12 @@ router
     .route('/')
     .get(isAuthorized(GET_ALL_OFFERS), getAllOffers)
     .post(isAuthorized(CREATE_OFFER), validateCreateOffer, setOfferBody, createOffer);
+
+router.get(
+    '/did-make-offer',
+    isAuthorized(GET_DID_TECHNICIAN_ADD_OFFER_TO_POST),
+    didTechnicianMakeOffer
+);
 router
     .route('/:id')
     .get(isAuthorized(GET_OFFER), isOfferOnPost, getOffer)
