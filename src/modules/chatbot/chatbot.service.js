@@ -3,6 +3,10 @@ import { getSolution } from '#src/shared/services/ai-service.js';
 import { asyncHandler } from '#src/shared/utils/async-handler.js';
 import { systemPrompt } from '#src/shared/enums/constants.js';
 
+function detectLanguage(text) {
+    const arabic = /[\u0600-\u06FF]/;
+    return arabic.test(text) ? 'ARABIC' : 'ENGLISH';
+}
 const saveMessage = asyncHandler(async (conversationId, role, text) => {
     if (!text || text.trim() === '') return null;
     return ChatbotConversation.create({ conversationId, role, text });
@@ -10,15 +14,19 @@ const saveMessage = asyncHandler(async (conversationId, role, text) => {
 
 export const respondWithAiService = async (conversationId, userMessage) => {
     await saveMessage(conversationId, 'user', userMessage);
+
     const history = await ChatbotConversation.find({ conversationId })
         .sort({ timestamp: 1 })
-        .limit(5)
+        .limit(10)
         .lean();
 
-    console.log(history);
+    const userLang = detectLanguage(userMessage);
+
     const messages = [
         { role: 'system', content: systemPrompt },
+        { role: 'system', content: `The user's message language is: ${userLang}` },
         ...history.map((msg) => ({ role: msg.role, content: msg.text })),
+        { role: 'user', content: userMessage },
     ];
 
     const modelText = await getSolution({ messages, stream: false });
