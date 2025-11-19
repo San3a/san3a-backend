@@ -9,6 +9,8 @@ import userRoutes from '#src/modules/user/user.route.js';
 import chatRoutes from '#src/modules/chat/chat-route.js';
 import chatbotRoutes from '#src/modules/chatbot/chatbot.routes.js';
 import adminRoutes from '#src/modules/admin/admin.route.js';
+import ServiceOrderRoutes from '#src/modules/ServiceOrder/service-order.routes.js';
+
 const mountRoutes = (app) => {
     app.use('/api/past-work', pastWorkRouter);
     app.use('/api/tech-services', techSerivceRouter);
@@ -20,6 +22,7 @@ const mountRoutes = (app) => {
     app.use('/api/chat', chatRoutes);
     app.use('/api/chatbot', chatbotRoutes);
     app.use('/api/admin', adminRoutes);
+    app.use('/api/service-order', ServiceOrderRoutes)
 };
 
 export default mountRoutes;
