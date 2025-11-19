@@ -38,18 +38,9 @@ export const createTechServiceSchema = Joi.object({
             'any.required': 'Images are required',
         }),
 
-    ratingsAverage: Joi.number().min(1).max(5).messages({
-        'number.min': "Rating can't be less than 1.0",
-        'number.max': "Rating can't be more than 5.0",
-    }),
-
     category: Joi.string().required().messages({
         'any.required': 'Product category is required!',
         'string.empty': 'Product category is required!',
-    }),
-
-    ratingsQuantity: Joi.number().min(0).messages({
-        'number.min': 'Ratings quantity must be a positive number',
     }),
 });
 
