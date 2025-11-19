@@ -11,7 +11,7 @@ import { Router } from 'express';
 const router = Router();
 
 //endpoints user
-router.patch('/updateMe', isAuthorized(UPDATE_USER), upload.array('image', 1), handleImageUpdate(User), updateMe); //add isAuthorized
+router.patch('/updateMe', isAuthorized(UPDATE_USER), upload.array('image', 1), handleImageUpdate(User), updateMe); 
 router.delete('/deleteMe', isAuthorized(DELETE_USER), deleteMe); // add isAuthorized
 router.get('/', getAllUsers);
 router.get('/:id', getUserById);

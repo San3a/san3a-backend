@@ -1,8 +1,8 @@
 const TechnicianRoles = Object.freeze({
-    PLUMBER: 'Plumbing',
+    PLUMBER: 'Plumber',
     ELECTRICIAN: 'Electrical',
     AC_REPAIR: 'AC Repair',
-    PAINTER: 'Painting',
+    PAINTER: 'Painter',
     CARPENTER: 'Carpentry',
 });
 export default TechnicianRoles;
