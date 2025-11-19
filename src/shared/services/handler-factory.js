@@ -69,6 +69,10 @@ export const getAll = (Model, populateOptions = null, nestedFilter = {}) =>
                 filter[fieldName] = req.params[paramName];
             }
         });
+        if (req.query.search) {
+            const searchRegex = new RegExp(req.query.search, 'i');
+            filter.$or = [{ title: searchRegex }, { description: searchRegex }];
+        }
         const total = await Model.countDocuments(filter);
 
         const features = new ApiFeatures(Model.find(filter), req.query)

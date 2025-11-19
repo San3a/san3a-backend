@@ -16,17 +16,17 @@ export const respondWithAiService = async (conversationId, userMessage) => {
     await saveMessage(conversationId, 'user', userMessage);
 
     const history = await ChatbotConversation.find({ conversationId })
-        .sort({ timestamp: 1 })
+        .sort({ timestamp: -1 })
         .limit(10)
         .lean();
 
-    const userLang = detectLanguage(userMessage);
+    history.reverse();
 
+    const userLang = detectLanguage(userMessage);
     const messages = [
         { role: 'system', content: systemPrompt },
         { role: 'system', content: `The user's message language is: ${userLang}` },
         ...history.map((msg) => ({ role: msg.role, content: msg.text })),
-        { role: 'user', content: userMessage },
     ];
 
     const modelText = await getSolution({ messages, stream: false });
