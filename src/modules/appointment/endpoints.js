@@ -1,0 +1,4 @@
+export const CREATE_APPOINTMENT = 'appointment:CREATE_APPOINTMENT';
+export const GET_APPOINTMENT = 'appointment:GET_APPOINTMENT';
+export const GET_ALL_APPOINTMENTS = 'appointment:GET_ALL_APPOINTMENTS';
+export const UPDATE_APPOINTMENT_STATUS = 'appointment:UPDATE_APPOINTMENT_STATUS';

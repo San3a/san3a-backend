@@ -10,6 +10,7 @@ import { unhandledRoutesHandler } from '#src/shared/middlewares/unhandled-routes
 import mountRoutes from '#src/modules/routes.js';
 import globalErrorHandler from '#src/shared/middlewares/global-error-handler.middleware.js';
 import { CLIENT_URL } from '#src/config/config.js';
+import { stripeWebhook } from '#src/modules/payment/payment.controller.js';
 
 const app = express();
 
@@ -30,6 +31,9 @@ app.options(
         credentials: true,
     })
 );
+
+//Stripe webhook
+app.post('/api/payments/webhook/stripe', express.raw({ type: 'application/json' }), stripeWebhook);
 
 app.set('query parser', 'extended');
 
