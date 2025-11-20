@@ -3,6 +3,7 @@ import {
     CREATE_OFFER,
     DELETE_OFFER,
     GET_ALL_OFFERS,
+    GET_DID_TECHNICIAN_ADD_OFFER_TO_POST,
     GET_OFFER,
     UPDATE_OFFER,
 } from '#src/modules/offer/endpoints.js';
@@ -23,6 +24,7 @@ export default [
     CREATE_OFFER,
     GET_ALL_OFFERS,
     GET_OFFER,
+    GET_DID_TECHNICIAN_ADD_OFFER_TO_POST,
     UPDATE_OFFER,
     DELETE_OFFER,
     CREATE_TECHSERVICE,
@@ -35,7 +37,6 @@ export default [
     GET_USER_POSTS,
     GET_POST,
 
-    
     UPDATE_USER,
     DELETE_USER,
 
