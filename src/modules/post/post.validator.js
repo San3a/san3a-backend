@@ -18,7 +18,7 @@ const createPostSchema = Joi.object({
     description: Joi.string().min(5).required().label('Description'),
     tags: Joi.array().items(Joi.string().lowercase().trim()).max(10).label('Tags'),
 
-    category: objectId('Category').label('Category'),
+    category: objectId('Category').required().label('Category'),
 
     location: Joi.object({
         type: Joi.string().valid('Point').required(),
@@ -49,7 +49,7 @@ const updatePostSchema = Joi.object({
         .optional(),
     existingImages: Joi.array().items(Joi.string()).optional(),
     tags: Joi.array().items(Joi.string().lowercase().trim()).max(10),
-    category: Joi.string().valid(...Object.values(TechnicianRoles)),
+    category: objectId('Category').label('Category'),
     location: Joi.object({
         type: Joi.string().valid('Point'),
         coordinates: Joi.array().items(Joi.number()).length(2),
