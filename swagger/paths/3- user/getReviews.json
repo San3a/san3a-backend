@@ -1,0 +1,24 @@
+{
+    "/user/reviews/{id}": {
+        "get": {
+            "tags": ["User"],
+            "summary": "Get reviews of a user",
+            "security": [],
+            "parameters": [
+                { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "responses": {
+                "200": {
+                    "description": "User reviews",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/GetMyReviewsResponse" }
+                        }
+                    }
+                },
+                "404": { "description": "User not found" },
+                "500": { "description": "Internal Server Error" }
+            }
+        }
+    }
+}

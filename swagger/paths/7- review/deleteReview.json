@@ -1,0 +1,16 @@
+{
+    "/reviews/{id}": {
+        "delete": {
+            "tags": ["Review"],
+            "summary": "Delete a review by ID",
+            "security": [{ "bearerAuth": [] }],
+            "parameters": [
+                { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "responses": {
+                "204": { "description": "Review deleted (no content)" },
+                "404": { "description": "Review not found" }
+            }
+        }
+    }
+}

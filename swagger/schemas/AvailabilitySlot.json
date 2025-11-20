@@ -1,0 +1,11 @@
+{
+    "AvailabilitySlot": {
+        "type": "object",
+        "properties": {
+            "start": { "type": "string", "pattern": "^\\d{2}:\\d{2}$", "example": "09:00" },
+            "end": { "type": "string", "pattern": "^\\d{2}:\\d{2}$", "example": "17:00" },
+            "isBooked": { "type": "boolean", "example": false }
+        },
+        "required": ["start", "end"]
+    }
+}

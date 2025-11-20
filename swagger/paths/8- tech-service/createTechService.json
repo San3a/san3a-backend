@@ -1,0 +1,45 @@
+{
+    "/tech-services": {
+        "post": {
+            "tags": ["TechService"],
+            "summary": "Create a tech service",
+            "security": [{ "bearerAuth": [] }],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": { "$ref": "#/components/schemas/CreateTechServiceRequest" }
+                    },
+                    "multipart/form-data": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "images": {
+                                    "type": "array",
+                                    "items": { "type": "string", "format": "binary" }
+                                },
+                                "title": { "type": "string" },
+                                "description": { "type": "string" },
+                                "price": { "type": "number" },
+                                "category": { "type": "string" }
+                            },
+                            "required": ["title", "description", "price", "category", "images"]
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "Tech service created",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/TechServiceResponse" }
+                        }
+                    }
+                },
+                "400": { "description": "Validation error (missing or invalid fields)" },
+                "409": { "description": "Service already exists for technician" }
+            }
+        }
+    }
+}

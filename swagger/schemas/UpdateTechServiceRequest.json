@@ -1,0 +1,13 @@
+{
+    "UpdateTechServiceRequest": {
+        "type": "object",
+        "properties": {
+            "title": { "type": "string", "minLength": 3, "maxLength": 30 },
+            "description": { "type": "string", "minLength": 5, "maxLength": 300 },
+            "price": { "type": "number", "minimum": 0 },
+            "images": { "type": "array", "items": { "$ref": "#/components/schemas/ImageObject" } },
+            "category": { "type": "string" }
+        },
+        "description": "Provide at least one field to update"
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "/chat": {
+        "post": {
+            "tags": ["Chat"],
+            "summary": "Create or retrieve existing conversation",
+            "security": [],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": { "$ref": "#/components/schemas/CreateConversationRequest" }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "Conversation returned/created",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/Conversation" }
+                        }
+                    }
+                },
+                "400": { "description": "Validation error (missing participants)" },
+                "500": { "description": "Server error" }
+            }
+        }
+    }
+}

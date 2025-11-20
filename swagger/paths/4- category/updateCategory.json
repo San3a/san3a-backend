@@ -1,0 +1,41 @@
+{
+    "/category/{id}": {
+        "patch": {
+            "tags": ["Category"],
+            "summary": "Update a category",
+            "security": [{ "bearerAuth": [] }],
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "schema": { "type": "string" }
+                }
+            ],
+            "requestBody": {
+                "required": false,
+                "content": {
+                    "multipart/form-data": {
+                        "schema": {
+                            "$ref": "#/components/schemas/UpdateCategoryRequest"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "Category updated",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CategoryResponse"
+                            }
+                        }
+                    }
+                },
+                "400": { "description": "Validation error (invalid update fields)" },
+                "404": { "description": "Category not found" }
+            }
+        }
+    }
+}

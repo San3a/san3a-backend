@@ -1,0 +1,14 @@
+{
+    "Review": {
+        "type": "object",
+        "properties": {
+            "_id": { "type": "string" },
+            "rating": { "type": "number", "minimum": 0, "maximum": 5 },
+            "review": { "type": "string" },
+            "techService": { "type": "string" },
+            "user": { "$ref": "#/components/schemas/User" },
+            "createdAt": { "type": "string", "format": "date-time" },
+            "updatedAt": { "type": "string", "format": "date-time" }
+        }
+    }
+}

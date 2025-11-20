@@ -1,0 +1,16 @@
+{
+    "/posts/{id}": {
+        "delete": {
+            "tags": ["Post"],
+            "summary": "Delete a post by ID",
+            "security": [{ "bearerAuth": [] }],
+            "parameters": [
+                { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "responses": {
+                "204": { "description": "Post deleted (no content)" },
+                "404": { "description": "Post not found" }
+            }
+        }
+    }
+}

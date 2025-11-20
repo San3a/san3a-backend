@@ -1,0 +1,24 @@
+{
+    "AddAvailabilityRequest": {
+        "type": "object",
+        "required": ["availabity"],
+        "properties": {
+            "availabity": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "required": ["day", "slots"],
+                    "properties": {
+                        "day": { "type": "string", "format": "date" },
+                        "slots": {
+                            "type": "array",
+                            "items": { "$ref": "#/components/schemas/AvailabilitySlot" },
+                            "minItems": 1
+                        }
+                    }
+                },
+                "minItems": 1
+            }
+        }
+    }
+}

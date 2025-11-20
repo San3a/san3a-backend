@@ -1,0 +1,10 @@
+{
+    "UpdateOfferRequest": {
+        "type": "object",
+        "properties": {
+            "price": { "type": "number", "minimum": 0 },
+            "message": { "type": "string" }
+        },
+        "description": "At least one field must be provided"
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "CategoryListResponse": {
+        "type": "object",
+        "properties": {
+            "status": { "type": "string" },
+            "total": { "type": "number" },
+            "page": { "type": "number" },
+            "limit": { "type": "number" },
+            "totalPages": { "type": "number" },
+            "results": { "type": "number" },
+            "data": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/Category" }
+            }
+        }
+    }
+}

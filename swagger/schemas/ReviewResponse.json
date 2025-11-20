@@ -1,0 +1,9 @@
+{
+    "ReviewResponse": {
+        "type": "object",
+        "properties": {
+            "status": { "type": "string", "example": "success" },
+            "data": { "$ref": "#/components/schemas/Review" }
+        }
+    }
+}

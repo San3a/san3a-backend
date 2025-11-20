@@ -1,0 +1,48 @@
+{
+    "/past-work/{id}": {
+        "patch": {
+            "tags": ["PastWork"],
+            "summary": "Update past work by ID",
+            "security": [],
+            "parameters": [
+                { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": { "$ref": "#/components/schemas/UpdatePastWorkRequest" }
+                    },
+                    "multipart/form-data": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "images": {
+                                    "type": "array",
+                                    "items": { "type": "string", "format": "binary" }
+                                },
+                                "title": { "type": "string" },
+                                "description": { "type": "string" },
+                                "location": { "$ref": "#/components/schemas/Point" },
+                                "dateCompleted": { "type": "string", "format": "date-time" },
+                                "customerName": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "Past work updated",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/PastWorkResponse" }
+                        }
+                    }
+                },
+                "400": { "description": "Validation error (invalid update fields)" },
+                "404": { "description": "Not found" }
+            }
+        }
+    }
+}

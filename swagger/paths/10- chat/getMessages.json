@@ -1,0 +1,29 @@
+{
+    "/chat/messages/{conversationId}": {
+        "get": {
+            "tags": ["Chat"],
+            "summary": "Get messages in a conversation",
+            "security": [],
+            "parameters": [
+                {
+                    "name": "conversationId",
+                    "in": "path",
+                    "required": true,
+                    "schema": { "type": "string" }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "List of messages",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/MessageListResponse" }
+                        }
+                    }
+                },
+                "404": { "description": "Conversation not found" },
+                "500": { "description": "Server error" }
+            }
+        }
+    }
+}

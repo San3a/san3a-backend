@@ -1,0 +1,16 @@
+{
+    "/past-work/{id}": {
+        "delete": {
+            "tags": ["PastWork"],
+            "summary": "Delete past work by ID",
+            "security": [],
+            "parameters": [
+                { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "responses": {
+                "204": { "description": "Deleted (no content)" },
+                "404": { "description": "Not found" }
+            }
+        }
+    }
+}

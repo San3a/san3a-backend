@@ -1,0 +1,16 @@
+{
+    "/tech-services/{id}": {
+        "delete": {
+            "tags": ["TechService"],
+            "summary": "Delete tech service",
+            "security": [{ "bearerAuth": [] }],
+            "parameters": [
+                { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "responses": {
+                "204": { "description": "Deleted (no content)" },
+                "404": { "description": "Not found" }
+            }
+        }
+    }
+}

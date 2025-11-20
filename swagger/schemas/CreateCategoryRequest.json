@@ -1,0 +1,16 @@
+{
+    "CreateCategoryRequest": {
+        "type": "object",
+        "properties": {
+            "name": { "type": "string" },
+            "nameAr": { "type": "string" },
+            "description": { "type": "string" },
+            "descriptionAr": { "type": "string" },
+            "image": {
+                "type": "string",
+                "format": "binary"
+            }
+        },
+        "required": ["name", "nameAr"]
+    }
+}

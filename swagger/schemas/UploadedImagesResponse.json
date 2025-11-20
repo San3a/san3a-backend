@@ -1,0 +1,9 @@
+{
+    "UploadedImagesResponse": {
+        "type": "object",
+        "properties": {
+            "success": { "type": "boolean", "example": true },
+            "messages": { "type": "array", "items": { "$ref": "#/components/schemas/Message" } }
+        }
+    }
+}

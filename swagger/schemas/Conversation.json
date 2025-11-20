@@ -1,0 +1,13 @@
+{
+    "Conversation": {
+        "type": "object",
+        "properties": {
+            "_id": { "type": "string" },
+            "participants": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/ChatUserSummary" }
+            },
+            "messages": { "type": "array", "items": { "$ref": "#/components/schemas/Message" } }
+        }
+    }
+}

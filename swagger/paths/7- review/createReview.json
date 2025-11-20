@@ -1,0 +1,28 @@
+{
+    "/reviews": {
+        "post": {
+            "tags": ["Review"],
+            "summary": "Create a review (authenticated)",
+            "security": [{ "bearerAuth": [] }],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": { "$ref": "#/components/schemas/CreateReviewRequest" }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "Review created",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/ReviewResponse" }
+                        }
+                    }
+                },
+                "400": { "description": "Duplicate or validation error" }
+            }
+        }
+    }
+}

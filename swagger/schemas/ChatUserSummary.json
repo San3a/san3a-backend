@@ -1,0 +1,17 @@
+{
+    "ChatUserSummary": {
+        "type": "object",
+        "description": "User subset returned in chat population (name & image)",
+        "properties": {
+            "_id": { "type": "string" },
+            "name": { "type": "string", "example": "Yousef Mohamed" },
+            "image": {
+                "type": "object",
+                "properties": {
+                    "public_id": { "type": "string" },
+                    "url": { "type": "string" }
+                }
+            }
+        }
+    }
+}

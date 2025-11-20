@@ -1,0 +1,12 @@
+{
+    "SendMessageRequest": {
+        "type": "object",
+        "required": ["conversationId", "author", "content"],
+        "properties": {
+            "conversationId": { "type": "string" },
+            "author": { "type": "string" },
+            "content": { "type": "string" },
+            "type": { "type": "string", "enum": ["text", "image"], "default": "text" }
+        }
+    }
+}

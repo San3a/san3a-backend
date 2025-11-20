@@ -1,0 +1,14 @@
+{
+    "UploadImagesRequest": {
+        "type": "object",
+        "required": ["author", "images"],
+        "properties": {
+            "author": { "type": "string" },
+            "images": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/ImageObject" },
+                "minItems": 1
+            }
+        }
+    }
+}

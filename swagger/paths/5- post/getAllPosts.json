@@ -1,0 +1,26 @@
+{
+    "/posts": {
+        "get": {
+            "tags": ["Post"],
+            "summary": "Get all posts",
+            "security": [{ "bearerAuth": [] }],
+            "parameters": [
+                { "name": "page", "in": "query", "schema": { "type": "integer" } },
+                { "name": "limit", "in": "query", "schema": { "type": "integer" } },
+                { "name": "sort", "in": "query", "schema": { "type": "string" } },
+                { "name": "fields", "in": "query", "schema": { "type": "string" } },
+                { "name": "search", "in": "query", "schema": { "type": "string" } }
+            ],
+            "responses": {
+                "200": {
+                    "description": "List of posts",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/PostListResponse" }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

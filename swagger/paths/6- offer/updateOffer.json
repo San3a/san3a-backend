@@ -1,0 +1,38 @@
+{
+    "/posts/{postId}/offers/{id}": {
+        "patch": {
+            "tags": ["Offer"],
+            "summary": "Update an offer by ID",
+            "security": [{ "bearerAuth": [] }],
+            "parameters": [
+                {
+                    "name": "postId",
+                    "in": "path",
+                    "required": true,
+                    "schema": { "type": "string" }
+                },
+                { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": { "$ref": "#/components/schemas/UpdateOfferRequest" }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "Offer updated",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/OfferResponse" }
+                        }
+                    }
+                },
+                "400": { "description": "Validation error (invalid update fields)" },
+                "404": { "description": "Offer not found" }
+            }
+        }
+    }
+}

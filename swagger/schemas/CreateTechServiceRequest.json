@@ -1,0 +1,17 @@
+{
+    "CreateTechServiceRequest": {
+        "type": "object",
+        "required": ["title", "description", "price", "images", "category"],
+        "properties": {
+            "title": { "type": "string", "minLength": 3, "maxLength": 30 },
+            "description": { "type": "string", "minLength": 5, "maxLength": 300 },
+            "price": { "type": "number", "minimum": 0 },
+            "images": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/ImageObject" },
+                "minItems": 1
+            },
+            "category": { "type": "string" }
+        }
+    }
+}

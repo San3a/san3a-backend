@@ -1,0 +1,23 @@
+{
+    "/past-work/{id}": {
+        "get": {
+            "tags": ["PastWork"],
+            "summary": "Get past work by ID",
+            "security": [],
+            "parameters": [
+                { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Past work details",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/PastWorkResponse" }
+                        }
+                    }
+                },
+                "404": { "description": "Not found" }
+            }
+        }
+    }
+}

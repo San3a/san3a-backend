@@ -1,0 +1,22 @@
+{
+    "/posts/{postId}/offers/{id}": {
+        "delete": {
+            "tags": ["Offer"],
+            "summary": "Delete an offer by ID",
+            "security": [{ "bearerAuth": [] }],
+            "parameters": [
+                {
+                    "name": "postId",
+                    "in": "path",
+                    "required": true,
+                    "schema": { "type": "string" }
+                },
+                { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "responses": {
+                "204": { "description": "Offer deleted (no content)" },
+                "404": { "description": "Offer not found" }
+            }
+        }
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "/posts/{postId}/offers": {
+        "post": {
+            "tags": ["Offer"],
+            "summary": "Create a new offer for a post",
+            "security": [{ "bearerAuth": [] }],
+            "parameters": [
+                { "name": "postId", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": { "$ref": "#/components/schemas/CreateOfferRequest" }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "Offer created",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/OfferResponse" }
+                        }
+                    }
+                },
+                "400": { "description": "Validation error (invalid offer fields)" },
+                "404": { "description": "Post not found" }
+            }
+        }
+    }
+}

@@ -1,0 +1,52 @@
+{
+    "/tech-services/{id}/availabity": {
+        "post": {
+            "tags": ["TechService"],
+            "summary": "Add availability slots to tech service",
+            "security": [{ "bearerAuth": [] }],
+            "parameters": [
+                { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": { "$ref": "#/components/schemas/AddAvailabilityRequest" }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "Slots added",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "status": { "type": "string", "example": "success" },
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "day": { "type": "string", "format": "date" },
+                                                "slots": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/AvailabilitySlot"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": { "description": "Validation error (invalid availability slots)" },
+                "404": { "description": "Tech service not found" }
+            }
+        }
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "/posts/{id}/select-offer": {
+        "patch": {
+            "tags": ["Post"],
+            "summary": "Select an offer for a post",
+            "security": [{ "bearerAuth": [] }],
+            "parameters": [
+                { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": { "$ref": "#/components/schemas/UpdateSelectedOfferRequest" }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "Offer selected",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/PostResponse" }
+                        }
+                    }
+                },
+                "400": { "description": "Validation error (missing offerId or invalid state)" },
+                "404": { "description": "Post not found" }
+            }
+        }
+    }
+}

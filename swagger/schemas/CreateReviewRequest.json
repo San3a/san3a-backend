@@ -1,0 +1,12 @@
+{
+    "CreateReviewRequest": {
+        "type": "object",
+        "required": ["rating", "review", "techService", "user"],
+        "properties": {
+            "rating": { "type": "number", "minimum": 0, "maximum": 5 },
+            "review": { "type": "string" },
+            "techService": { "type": "string" },
+            "user": { "type": "string" }
+        }
+    }
+}

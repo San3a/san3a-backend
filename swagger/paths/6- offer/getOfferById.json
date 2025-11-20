@@ -1,0 +1,29 @@
+{
+    "/posts/{postId}/offers/{id}": {
+        "get": {
+            "tags": ["Offer"],
+            "summary": "Get an offer by ID for a post",
+            "security": [{ "bearerAuth": [] }],
+            "parameters": [
+                {
+                    "name": "postId",
+                    "in": "path",
+                    "required": true,
+                    "schema": { "type": "string" }
+                },
+                { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Offer details",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/OfferResponse" }
+                        }
+                    }
+                },
+                "404": { "description": "Offer not found" }
+            }
+        }
+    }
+}

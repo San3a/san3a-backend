@@ -1,0 +1,16 @@
+{
+    "SignupRequest": {
+        "type": "object",
+        "required": ["name", "email", "password", "passwordConfirm"],
+        "properties": {
+            "name": { "type": "string", "example": "Yousef Mohamed" },
+            "email": { "type": "string", "format": "email", "example": "yousef@example.com" },
+            "password": { "type": "string", "format": "password", "example": "StrongP@ss123" },
+            "passwordConfirm": {
+                "type": "string",
+                "format": "password",
+                "example": "StrongP@ss123"
+            }
+        }
+    }
+}
