@@ -1,0 +1,22 @@
+{
+    "/user/top-technicians-nearby": {
+        "get": {
+            "tags": ["User"],
+            "summary": "Get top 5 technicians near authenticated user (sorted by rating)",
+            "security": [{ "bearerAuth": [] }],
+            "responses": {
+                "200": {
+                    "description": "List of top technicians (distance included if requester has location)",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TopTechniciansNearbyResponse"
+                            }
+                        }
+                    }
+                },
+                "401": { "description": "Unauthorized" }
+            }
+        }
+    }
+}

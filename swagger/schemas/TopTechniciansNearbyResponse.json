@@ -1,0 +1,13 @@
+{
+    "TopTechniciansNearbyResponse": {
+        "type": "object",
+        "properties": {
+            "status": { "type": "string", "example": "success" },
+            "results": { "type": "integer", "example": 5 },
+            "data": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/TopTechnicianSummary" }
+            }
+        }
+    }
+}
