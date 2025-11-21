@@ -59,7 +59,7 @@ const userSchema = new mongoose.Schema(
             public_id: String,
             url: String,
         },
-        address: pointSchema,
+        location: pointSchema,
         rating: {
             type: Number,
             default: 0,
@@ -68,7 +68,7 @@ const userSchema = new mongoose.Schema(
         },
     },
     {
-        timestamps: true
+        timestamps: true,
     }
 );
 
