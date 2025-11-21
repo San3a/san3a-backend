@@ -108,3 +108,19 @@ export const uploadImages = async (req, res) => {
         });
     }
 };
+
+export const getUserConversations = async (req, res) => {
+    const { userId } = req.body;
+
+    if (!userId) {
+        return res.status(400).json({ message: 'userId is required' });
+    }
+
+    try {
+        const conversations = await chatService.getUserConversationsWithOtherUser(userId);
+        res.json(conversations);
+    } catch (err) {
+        console.error('Error fetching conversations:', err);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
