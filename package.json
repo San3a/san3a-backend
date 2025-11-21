@@ -4,9 +4,8 @@
     "description": "",
     "main": "./src/core/server.js",
     "scripts": {
-        "dev": "cross-env NODE_ENV=development nodemon ./src/core/server.js",
         "build-swagger": "node combineSwagger.js",
-        "swagger": "npm run build-swagger && cross-env NODE_ENV=development nodemon ./src/core/server.js",
+        "dev": "npm run build-swagger && cross-env NODE_ENV=development nodemon ./src/core/server.js",
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "cross-env NODE_ENV=production node ./src/core/server.js"
     },
