@@ -21,10 +21,6 @@ const serviceOrderSchema = new mongoose.Schema({
         type: String,
         enum: ['pending', 'confirmed', 'cancelled'],
         default: 'pending',
-    },
-    address: {
-        type: String,
-        required: true
     }
 }, 
 {

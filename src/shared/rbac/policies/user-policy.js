@@ -16,7 +16,9 @@ import {
 } from '#src/modules/tech-service/endpoints.js';
 
 import { CREATE_REVIEW, DELETE_REVIEW, UPDATE_REVIEW } from '#src/modules/review/endpoints.js';
-import { GET_ALL_OFFERS, GET_OFFER } from '#src/modules/offer/endpoints.js';
+import { CREATE_OFFER, GET_ALL_OFFERS, GET_OFFER } from '#src/modules/offer/endpoints.js';
+import { CREATE_APPOINTMENT, PAY_FOR_TECH_SERVICE } from '#src/modules/appointment/endpoints.js';
+import { CANCEL_PAYMENT, CREATE_SERVICE_ORDER } from '#src/modules/ServiceOrder/endpoints.js';
 // we add here endpoints that are valid for user role
 export default [
     GET_ALL_POSTS,
@@ -43,4 +45,10 @@ export default [
     GET_OFFER,
 
     GETPASTWORK,
+
+    CREATE_OFFER,
+    CREATE_APPOINTMENT,
+    PAY_FOR_TECH_SERVICE,
+    CREATE_SERVICE_ORDER,
+    CANCEL_PAYMENT
 ];

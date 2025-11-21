@@ -1,15 +1,17 @@
-import { createServiceOrderCash, deleteServiceOrder, getAllServiceOrders, getSingleServiceOrder, updateServiceOrder } from '#src/modules/ServiceOrder/service-order.controller.js';
+import { CREATE_SERVICE_ORDER } from '#src/modules/ServiceOrder/endpoints.js';
+import { createServiceOrder, deleteServiceOrder, getAllServiceOrders, getSingleServiceOrder, updateServiceOrder } from '#src/modules/ServiceOrder/service-order.controller.js';
+import { isAuthorized } from '#src/shared/middlewares/authorization.middleware.js';
 import express from 'express'
 
 const router = express.Router();
 
 router.route('/')
     .get(getAllServiceOrders)
-
-router.route('/cash')
-    .post(createServiceOrderCash)
+    .post(
+        isAuthorized(CREATE_SERVICE_ORDER),
+        createServiceOrder
+    );
     
-// TODO: Add Create Service order Stripe
     
 router.route('/:id')
     .get(getSingleServiceOrder)

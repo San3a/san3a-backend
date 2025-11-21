@@ -61,7 +61,13 @@ const techServiceSchema = new mongoose.Schema({
     ],
 });
 techServiceSchema.pre(/^find/, function (next) {
-    this.populate({ path: 'category' });
+    this.populate({
+        path: 'category'
+    })
+    .populate({
+        path: 'user'
+    });
+
     next();
 });
 const TechService = mongoose.model('TechService', techServiceSchema);

@@ -59,7 +59,8 @@ const userSchema = new mongoose.Schema(
             public_id: String,
             url: String,
         },
-        address: pointSchema,
+        location: pointSchema,
+        address: String,
         rating: {
             type: Number,
             default: 0,
