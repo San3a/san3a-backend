@@ -18,7 +18,12 @@ import {
 } from '#src/modules/tech-service/endpoints.js';
 
 import { CREATE_PASTWORK } from '#src/modules/past-work/endpoints.js';
-import { DELETE_USER, UPDATE_USER, GETPASTWORK } from '#src/modules/user/endpoints.js';
+import {
+    DELETE_USER,
+    UPDATE_USER,
+    GETPASTWORK,
+    GET_TOP_TECHNICIANS_NEARBY,
+} from '#src/modules/user/endpoints.js';
 
 export default [
     CREATE_OFFER,
@@ -41,4 +46,5 @@ export default [
     DELETE_USER,
 
     CREATE_PASTWORK,
+    GET_TOP_TECHNICIANS_NEARBY,
 ];
