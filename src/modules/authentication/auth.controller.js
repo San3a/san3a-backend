@@ -7,13 +7,13 @@ import crypto from 'crypto';
 import { StatusCodes } from 'http-status-codes';
 
 // Helpers
-const signToken = (id) =>
-    jwt.sign({ id }, process.env.JWT_SECRET, {
+const signToken = (id, role) =>
+    jwt.sign({ id, role }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN,
     });
 
 const createSendToken = (user, statusCode, res) => {
-    const token = signToken(user._id);
+    const token = signToken(user._id, user.role);
     res.status(statusCode).json({
         status: 'success',
         token,
@@ -28,6 +28,7 @@ export const signup = asyncHandler(async (req, res, next) => {
         email: req.body.email,
         password: req.body.password,
         passwordConfirm: req.body.passwordConfirm,
+        role: req.body.role,
     });
 
     createSendToken(newUser, StatusCodes.CREATED, res);

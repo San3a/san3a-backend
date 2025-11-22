@@ -1,0 +1,6 @@
+{
+    "ConversationListResponse": {
+        "type": "array",
+        "items": { "$ref": "#/components/schemas/Conversation" }
+    }
+}

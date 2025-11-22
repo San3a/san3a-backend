@@ -1,0 +1,46 @@
+{
+    "/past-work": {
+        "post": {
+            "tags": ["PastWork"],
+            "summary": "Create a past work entry",
+            "security": [{ "bearerAuth": [] }],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": { "$ref": "#/components/schemas/CreatePastWorkRequest" }
+                    },
+                    "multipart/form-data": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "images": {
+                                    "type": "array",
+                                    "items": { "type": "string", "format": "binary" }
+                                },
+                                "title": { "type": "string" },
+                                "description": { "type": "string" },
+                                "userId": { "type": "string" },
+                                "location": { "$ref": "#/components/schemas/Point" },
+                                "dateCompleted": { "type": "string", "format": "date-time" },
+                                "customerName": { "type": "string" }
+                            },
+                            "required": ["title", "description", "images", "userId"]
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "Past work created",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/PastWorkResponse" }
+                        }
+                    }
+                },
+                "400": { "description": "Validation error (missing or invalid fields)" }
+            }
+        }
+    }
+}

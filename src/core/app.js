@@ -11,7 +11,13 @@ import mountRoutes from '#src/modules/routes.js';
 import globalErrorHandler from '#src/shared/middlewares/global-error-handler.middleware.js';
 import { CLIENT_URL } from '#src/config/config.js';
 import { stripeWebhook } from '#src/modules/payment/payment.controller.js';
+import swaggerUi from 'swagger-ui-express';
+import pkg from 'fs-extra';
+const { readFile } = pkg;
 
+const swaggerDocument = JSON.parse(
+    await readFile(new URL('../../swagger/swagger.json', import.meta.url))
+);
 const app = express();
 
 app.use(
@@ -43,6 +49,7 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 mountRoutes(app);
 
 app.use(unhandledRoutesHandler);

@@ -1,0 +1,24 @@
+{
+    "Category": {
+        "type": "object",
+        "properties": {
+            "_id": { "type": "string" },
+            "name": { "type": "string" },
+            "nameAr": { "type": "string" },
+            "description": { "type": "string" },
+            "descriptionAr": { "type": "string" },
+            "images": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "url": { "type": "string" },
+                        "public_id": { "type": "string" }
+                    }
+                }
+            },
+            "createdAt": { "type": "string" },
+            "updatedAt": { "type": "string" }
+        }
+    }
+}

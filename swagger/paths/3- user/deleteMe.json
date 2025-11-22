@@ -1,0 +1,22 @@
+{
+    "/user/deleteMe": {
+        "delete": {
+            "tags": ["User"],
+            "summary": "Soft delete current user",
+            "security": [{ "bearerAuth": [] }],
+            "responses": {
+                "200": {
+                    "description": "User deleted",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/DeleteMeResponse" }
+                        }
+                    }
+                },
+                "401": { "description": "Unauthorized" },
+                "404": { "description": "User not found" },
+                "500": { "description": "Internal Server Error" }
+            }
+        }
+    }
+}

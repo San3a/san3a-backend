@@ -1,0 +1,23 @@
+{
+    "/admin/stats/technicians-per-category": {
+        "get": {
+            "tags": ["Admin"],
+            "summary": "Get technicians per category",
+            "security": [{ "bearerAuth": [] }],
+            "responses": {
+                "200": {
+                    "description": "Technicians per category",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TechniciansPerCategoryResponse"
+                            }
+                        }
+                    }
+                },
+                "401": { "description": "Unauthorized" },
+                "500": { "description": "Internal Server Error" }
+            }
+        }
+    }
+}

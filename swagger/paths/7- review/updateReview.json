@@ -1,0 +1,32 @@
+{
+    "/reviews/{id}": {
+        "patch": {
+            "tags": ["Review"],
+            "summary": "Update a review by ID",
+            "security": [{ "bearerAuth": [] }],
+            "parameters": [
+                { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": { "$ref": "#/components/schemas/UpdateReviewRequest" }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "Review updated",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/ReviewResponse" }
+                        }
+                    }
+                },
+                "400": { "description": "Validation error (invalid update fields)" },
+                "404": { "description": "Review not found" }
+            }
+        }
+    }
+}

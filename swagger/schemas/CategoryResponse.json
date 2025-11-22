@@ -1,0 +1,9 @@
+{
+    "CategoryResponse": {
+        "type": "object",
+        "properties": {
+            "status": { "type": "string" },
+            "data": { "$ref": "#/components/schemas/Category" }
+        }
+    }
+}

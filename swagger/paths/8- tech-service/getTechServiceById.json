@@ -1,0 +1,23 @@
+{
+    "/tech-services/{id}": {
+        "get": {
+            "tags": ["TechService"],
+            "summary": "Get tech service by ID",
+            "security": [],
+            "parameters": [
+                { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Tech service details",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/TechServiceResponse" }
+                        }
+                    }
+                },
+                "404": { "description": "Not found" }
+            }
+        }
+    }
+}

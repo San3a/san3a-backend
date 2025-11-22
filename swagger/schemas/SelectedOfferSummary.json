@@ -1,0 +1,11 @@
+{
+    "SelectedOfferSummary": {
+        "type": "object",
+        "description": "Subset of offer fields populated inside post.selectedOffer",
+        "properties": {
+            "price": { "type": "number", "example": 150 },
+            "technician": { "$ref": "#/components/schemas/UserSummary" }
+        },
+        "required": ["price", "technician"]
+    }
+}

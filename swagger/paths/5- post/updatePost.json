@@ -1,0 +1,53 @@
+{
+    "/posts/{id}": {
+        "patch": {
+            "tags": ["Post"],
+            "summary": "Update a post by ID",
+            "security": [{ "bearerAuth": [] }],
+            "parameters": [
+                { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": { "$ref": "#/components/schemas/UpdatePostRequest" }
+                    },
+                    "multipart/form-data": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "images": {
+                                    "type": "array",
+                                    "items": { "type": "string", "format": "binary" },
+                                    "description": "New image files"
+                                },
+                                "existingImages": {
+                                    "type": "array",
+                                    "items": { "type": "string" }
+                                },
+                                "title": { "type": "string" },
+                                "description": { "type": "string" },
+                                "tags": { "type": "array", "items": { "type": "string" } },
+                                "category": { "type": "string" },
+                                "location": { "$ref": "#/components/schemas/Point" }
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "Post updated",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/PostResponse" }
+                        }
+                    }
+                },
+                "400": { "description": "Validation error (invalid update fields)" },
+                "404": { "description": "Post not found" }
+            }
+        }
+    }
+}

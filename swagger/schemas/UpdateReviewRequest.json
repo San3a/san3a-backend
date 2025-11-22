@@ -1,0 +1,12 @@
+{
+    "UpdateReviewRequest": {
+        "type": "object",
+        "properties": {
+            "rating": { "type": "number", "minimum": 0, "maximum": 5 },
+            "review": { "type": "string" },
+            "techService": { "type": "string" },
+            "user": { "type": "string" }
+        },
+        "description": "At least one field should be supplied"
+    }
+}

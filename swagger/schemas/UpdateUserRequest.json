@@ -1,0 +1,21 @@
+{
+    "UpdateUserRequest": {
+        "type": "object",
+        "properties": {
+            "name": { "type": "string" },
+            "email": { "type": "string" },
+            "role": { "type": "string", "enum": ["user", "technician", "admin"] },
+            "active": { "type": "boolean" },
+            "totalEarning": { "type": "number" },
+            "image": {
+                "type": "object",
+                "properties": {
+                    "public_id": { "type": "string" },
+                    "url": { "type": "string" }
+                }
+            },
+            "address": { "$ref": "#/components/schemas/Point" },
+            "rating": { "type": "number" }
+        }
+    }
+}

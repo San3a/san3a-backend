@@ -1,0 +1,26 @@
+{
+    "Availabity": {
+        "type": "object",
+        "description": "Availability day document with slots",
+        "properties": {
+            "_id": { "type": "string" },
+            "day": {
+                "type": "string",
+                "format": "date-time",
+                "example": "2025-11-21T00:00:00.000Z"
+            },
+            "slots": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "start": { "type": "string", "example": "09:00" },
+                        "end": { "type": "string", "example": "11:00" },
+                        "isBooked": { "type": "boolean", "example": false }
+                    },
+                    "required": ["start", "end", "isBooked"]
+                }
+            }
+        }
+    }
+}

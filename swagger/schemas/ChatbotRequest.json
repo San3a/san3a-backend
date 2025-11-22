@@ -1,0 +1,10 @@
+{
+    "ChatbotRequest": {
+        "type": "object",
+        "required": ["conversationId", "userMessage"],
+        "properties": {
+            "conversationId": { "type": "string" },
+            "userMessage": { "type": "string" }
+        }
+    }
+}

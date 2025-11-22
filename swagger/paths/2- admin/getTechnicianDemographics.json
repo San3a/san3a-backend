@@ -1,0 +1,23 @@
+{
+    "/admin/stats/technician-demographics": {
+        "get": {
+            "tags": ["Admin"],
+            "summary": "Get technician demographics",
+            "security": [{ "bearerAuth": [] }],
+            "responses": {
+                "200": {
+                    "description": "Technician demographics",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TechnicianDemographicsResponse"
+                            }
+                        }
+                    }
+                },
+                "401": { "description": "Unauthorized" },
+                "500": { "description": "Internal Server Error" }
+            }
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "CreateOfferRequest": {
+        "type": "object",
+        "required": ["price", "message"],
+        "properties": {
+            "price": { "type": "number", "minimum": 0 },
+            "message": { "type": "string" }
+        },
+        "description": "Technician offer on a post; post & technician inferred from route/user"
+    }
+}

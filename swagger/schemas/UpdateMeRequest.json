@@ -1,0 +1,16 @@
+{
+    "UpdateMeRequest": {
+        "type": "object",
+        "properties": {
+            "name": { "type": "string" },
+            "email": { "type": "string" },
+            "image": {
+                "type": "object",
+                "properties": {
+                    "public_id": { "type": "string" },
+                    "url": { "type": "string" }
+                }
+            }
+        }
+    }
+}

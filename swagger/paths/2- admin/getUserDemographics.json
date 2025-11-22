@@ -1,0 +1,21 @@
+{
+    "/admin/stats/user-demographics": {
+        "get": {
+            "tags": ["Admin"],
+            "summary": "Get user demographics",
+            "security": [{ "bearerAuth": [] }],
+            "responses": {
+                "200": {
+                    "description": "User demographics",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/UserDemographicsResponse" }
+                        }
+                    }
+                },
+                "401": { "description": "Unauthorized" },
+                "500": { "description": "Internal Server Error" }
+            }
+        }
+    }
+}

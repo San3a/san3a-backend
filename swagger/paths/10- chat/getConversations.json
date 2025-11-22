@@ -1,0 +1,24 @@
+{
+    "/chat/{userId}": {
+        "get": {
+            "tags": ["Chat"],
+            "summary": "Get conversations for a user",
+            "security": [],
+            "parameters": [
+                { "name": "userId", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "responses": {
+                "200": {
+                    "description": "List of conversations",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/ConversationListResponse" }
+                        }
+                    }
+                },
+                "404": { "description": "User not found" },
+                "500": { "description": "Server error" }
+            }
+        }
+    }
+}

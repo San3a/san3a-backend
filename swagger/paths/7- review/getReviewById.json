@@ -1,0 +1,23 @@
+{
+    "/reviews/{id}": {
+        "get": {
+            "tags": ["Review"],
+            "summary": "Get a review by ID",
+            "security": [],
+            "parameters": [
+                { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Review details",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/ReviewResponse" }
+                        }
+                    }
+                },
+                "404": { "description": "Review not found" }
+            }
+        }
+    }
+}

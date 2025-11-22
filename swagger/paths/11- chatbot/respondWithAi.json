@@ -1,0 +1,29 @@
+{
+    "/chatbot": {
+        "post": {
+            "tags": ["Chatbot"],
+            "summary": "Get AI response for a conversation",
+            "security": [],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": { "$ref": "#/components/schemas/ChatbotRequest" }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "AI response returned",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/ChatbotResponse" }
+                        }
+                    }
+                },
+                "400": { "description": "Validation error (missing message or conversationId)" },
+                "503": { "description": "AI model unavailable" }
+            }
+        }
+    }
+}

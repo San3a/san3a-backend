@@ -1,0 +1,23 @@
+{
+    "/category/{id}": {
+        "delete": {
+            "tags": ["Category"],
+            "summary": "Delete a category",
+            "security": [{ "bearerAuth": [] }],
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "schema": { "type": "string" }
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "Category deleted"
+                },
+                "404": { "description": "Category not found" }
+            }
+        }
+    }
+}

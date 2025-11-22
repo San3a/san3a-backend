@@ -1,0 +1,28 @@
+{
+    "/admin/categories/{id}": {
+        "delete": {
+            "tags": ["Admin"],
+            "summary": "Delete a category",
+            "security": [{ "bearerAuth": [] }],
+            "parameters": [
+                { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Category deleted",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": { "message": { "type": "string" } }
+                            }
+                        }
+                    }
+                },
+                "401": { "description": "Unauthorized" },
+                "404": { "description": "Category not found" },
+                "500": { "description": "Internal Server Error" }
+            }
+        }
+    }
+}

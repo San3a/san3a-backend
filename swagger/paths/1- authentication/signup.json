@@ -1,0 +1,28 @@
+{
+    "/auth/signup": {
+        "post": {
+            "tags": ["Authentication"],
+            "summary": "User signup",
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": { "$ref": "#/components/schemas/SignupRequest" }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "User created successfully",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/AuthSuccessResponse" }
+                        }
+                    }
+                },
+                "400": { "description": "Validation error (e.g. weak password)" },
+                "409": { "description": "Email already in use" }
+            }
+        }
+    }
+}

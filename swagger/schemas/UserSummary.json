@@ -1,0 +1,17 @@
+{
+    "UserSummary": {
+        "type": "object",
+        "description": "Subset of user fields returned via population (name & image)",
+        "properties": {
+            "_id": { "type": "string", "example": "675f1a99c1b23cf1290af001" },
+            "name": { "type": "string", "example": "Yousef Mohamed" },
+            "image": {
+                "type": "object",
+                "properties": {
+                    "public_id": { "type": "string", "nullable": true },
+                    "url": { "type": "string", "nullable": true }
+                }
+            }
+        }
+    }
+}

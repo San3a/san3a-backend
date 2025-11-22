@@ -1,0 +1,32 @@
+{
+    "/category": {
+        "post": {
+            "tags": ["Category"],
+            "summary": "Create a new category",
+            "security": [{ "bearerAuth": [] }],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "multipart/form-data": {
+                        "schema": {
+                            "$ref": "#/components/schemas/CreateCategoryRequest"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "Category created",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CategoryResponse"
+                            }
+                        }
+                    }
+                },
+                "400": { "description": "Validation error (missing or invalid fields)" }
+            }
+        }
+    }
+}

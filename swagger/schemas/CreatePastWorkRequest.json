@@ -1,0 +1,20 @@
+{
+    "CreatePastWorkRequest": {
+        "type": "object",
+        "required": ["title", "description", "images", "userId"],
+        "properties": {
+            "title": { "type": "string", "minLength": 5, "maxLength": 50 },
+            "description": { "type": "string", "minLength": 8, "maxLength": 500 },
+            "images": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/ImageObject" },
+                "minItems": 1,
+                "maxItems": 10
+            },
+            "userId": { "type": "string" },
+            "location": { "$ref": "#/components/schemas/Point" },
+            "dateCompleted": { "type": "string", "format": "date-time" },
+            "customerName": { "type": "string" }
+        }
+    }
+}

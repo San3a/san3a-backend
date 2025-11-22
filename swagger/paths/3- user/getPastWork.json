@@ -1,0 +1,24 @@
+{
+    "/user/{id}": {
+        "get": {
+            "tags": ["User"],
+            "summary": "Get user by ID",
+            "security": [],
+            "parameters": [
+                { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "responses": {
+                "200": {
+                    "description": "User details",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/GetUserByIdResponse" }
+                        }
+                    }
+                },
+                "404": { "description": "User not found" },
+                "500": { "description": "Internal Server Error" }
+            }
+        }
+    }
+}

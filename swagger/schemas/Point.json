@@ -1,0 +1,15 @@
+{
+    "Point": {
+        "type": "object",
+        "properties": {
+            "type": { "type": "string", "example": "Point" },
+            "coordinates": {
+                "type": "array",
+                "items": { "type": "number" },
+                "example": [31.2357, 30.0444]
+            },
+            "address": { "type": "string" }
+        },
+        "required": ["type", "coordinates"]
+    }
+}

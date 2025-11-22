@@ -1,0 +1,14 @@
+{
+    "UpdatePastWorkRequest": {
+        "type": "object",
+        "properties": {
+            "title": { "type": "string", "minLength": 5, "maxLength": 50 },
+            "description": { "type": "string", "minLength": 8, "maxLength": 500 },
+            "images": { "type": "array", "items": { "$ref": "#/components/schemas/ImageObject" } },
+            "location": { "$ref": "#/components/schemas/Point" },
+            "dateCompleted": { "type": "string", "format": "date-time" },
+            "customerName": { "type": "string" }
+        },
+        "description": "All fields optional; images replace existing set if provided"
+    }
+}

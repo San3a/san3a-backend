@@ -1,0 +1,26 @@
+{
+    "CreatePostRequest": {
+        "type": "object",
+        "required": ["user", "images", "title", "description", "category", "location"],
+        "properties": {
+            "user": { "type": "string", "description": "Injected from authenticated user" },
+            "images": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/ImageObject" },
+                "minItems": 1
+            },
+            "title": { "type": "string", "minLength": 5, "maxLength": 100 },
+            "description": { "type": "string", "minLength": 5 },
+            "tags": { "type": "array", "items": { "type": "string" }, "maxItems": 10 },
+            "category": { "type": "string" },
+            "location": { "$ref": "#/components/schemas/Point" },
+            "status": {
+                "type": "string",
+                "enum": ["open", "in-progress", "completed"],
+                "default": "open"
+            },
+            "offersCount": { "type": "integer", "default": 0 },
+            "selectedOffer": { "type": ["string", "null"], "nullable": true }
+        }
+    }
+}

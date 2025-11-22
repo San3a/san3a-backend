@@ -1,0 +1,17 @@
+{
+    "PastWork": {
+        "type": "object",
+        "properties": {
+            "_id": { "type": "string" },
+            "title": { "type": "string" },
+            "description": { "type": "string" },
+            "images": { "type": "array", "items": { "$ref": "#/components/schemas/ImageObject" } },
+            "userId": { "type": "string" },
+            "location": { "$ref": "#/components/schemas/Point" },
+            "dateCompleted": { "type": "string", "format": "date-time" },
+            "customerName": { "type": "string" },
+            "createdAt": { "type": "string", "format": "date-time" },
+            "updatedAt": { "type": "string", "format": "date-time" }
+        }
+    }
+}

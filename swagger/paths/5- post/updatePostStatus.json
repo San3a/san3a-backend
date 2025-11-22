@@ -1,0 +1,32 @@
+{
+    "/posts/{id}/status": {
+        "patch": {
+            "tags": ["Post"],
+            "summary": "Update a post's status",
+            "security": [{ "bearerAuth": [] }],
+            "parameters": [
+                { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": { "$ref": "#/components/schemas/UpdatePostStatusRequest" }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "Status updated",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/PostResponse" }
+                        }
+                    }
+                },
+                "400": { "description": "Validation error (invalid status value)" },
+                "404": { "description": "Post not found" }
+            }
+        }
+    }
+}

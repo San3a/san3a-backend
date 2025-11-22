@@ -1,0 +1,9 @@
+{
+    "UpdateSelectedOfferRequest": {
+        "type": "object",
+        "required": ["selectedOffer"],
+        "properties": {
+            "selectedOffer": { "type": "string" }
+        }
+    }
+}

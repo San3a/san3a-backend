@@ -1,0 +1,9 @@
+{
+    "UpdatePostStatusRequest": {
+        "type": "object",
+        "required": ["status"],
+        "properties": {
+            "status": { "type": "string", "enum": ["open", "in-progress", "completed"] }
+        }
+    }
+}

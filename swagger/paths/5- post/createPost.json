@@ -1,0 +1,46 @@
+{
+    "/posts": {
+        "post": {
+            "tags": ["Post"],
+            "summary": "Create a new post",
+            "security": [{ "bearerAuth": [] }],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": { "$ref": "#/components/schemas/CreatePostRequest" }
+                    },
+                    "multipart/form-data": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "images": {
+                                    "type": "array",
+                                    "items": { "type": "string", "format": "binary" },
+                                    "description": "Image files"
+                                },
+                                "title": { "type": "string" },
+                                "description": { "type": "string" },
+                                "tags": { "type": "array", "items": { "type": "string" } },
+                                "category": { "type": "string" },
+                                "location": { "$ref": "#/components/schemas/Point" }
+                            },
+                            "required": ["title", "description", "category", "location", "images"]
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "Post created",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/PostResponse" }
+                        }
+                    }
+                },
+                "400": { "description": "Validation error (missing or invalid fields)" }
+            }
+        }
+    }
+}

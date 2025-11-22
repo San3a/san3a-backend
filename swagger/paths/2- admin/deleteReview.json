@@ -1,0 +1,28 @@
+{
+    "/admin/reviews/{id}": {
+        "delete": {
+            "tags": ["Admin"],
+            "summary": "Delete a review",
+            "security": [{ "bearerAuth": [] }],
+            "parameters": [
+                { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Review deleted",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": { "message": { "type": "string" } }
+                            }
+                        }
+                    }
+                },
+                "401": { "description": "Unauthorized" },
+                "404": { "description": "Review not found" },
+                "500": { "description": "Internal Server Error" }
+            }
+        }
+    }
+}

@@ -1,0 +1,48 @@
+{
+    "/chat/{conversationId}/upload": {
+        "post": {
+            "tags": ["Chat"],
+            "summary": "Upload images as messages",
+            "security": [],
+            "parameters": [
+                {
+                    "name": "conversationId",
+                    "in": "path",
+                    "required": true,
+                    "schema": { "type": "string" }
+                }
+            ],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "multipart/form-data": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "images": {
+                                    "type": "array",
+                                    "items": { "type": "string", "format": "binary" }
+                                },
+                                "author": { "type": "string" }
+                            },
+                            "required": ["images", "author"]
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "Images uploaded as messages",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/UploadedImagesResponse" }
+                        }
+                    }
+                },
+                "400": { "description": "No images processed" },
+                "404": { "description": "Conversation not found" },
+                "500": { "description": "Server error" }
+            }
+        }
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "TechServiceListResponse": {
+        "type": "object",
+        "properties": {
+            "status": { "type": "string", "example": "success" },
+            "total": { "type": "integer" },
+            "page": { "type": "integer" },
+            "limit": { "type": "integer" },
+            "totalPages": { "type": "integer" },
+            "results": { "type": "integer" },
+            "data": { "type": "array", "items": { "$ref": "#/components/schemas/TechService" } }
+        }
+    }
+}

@@ -30,4 +30,6 @@ router.post(
 );
 router.delete('/:messageId', chatController.deleteMessage);
 
+router.post('/conversations', chatController.getUserConversations);
+
 export default router;

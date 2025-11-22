@@ -1,0 +1,26 @@
+{
+    "/tech-services": {
+        "get": {
+            "tags": ["TechService"],
+            "summary": "Get all tech services",
+            "security": [],
+            "parameters": [
+                { "name": "page", "in": "query", "schema": { "type": "integer" } },
+                { "name": "limit", "in": "query", "schema": { "type": "integer" } },
+                { "name": "sort", "in": "query", "schema": { "type": "string" } },
+                { "name": "fields", "in": "query", "schema": { "type": "string" } },
+                { "name": "search", "in": "query", "schema": { "type": "string" } }
+            ],
+            "responses": {
+                "200": {
+                    "description": "List of tech services",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/TechServiceListResponse" }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

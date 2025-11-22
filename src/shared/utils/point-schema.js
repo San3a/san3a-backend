@@ -12,6 +12,7 @@ const pointSchema = new mongoose.Schema({
         validate: [(val) => val.length === 2, 'Coordinates length must = 2 (longitude, latitude)'],
         index: '2dsphere',
     },
+    address: String,
 });
 
 export default pointSchema;

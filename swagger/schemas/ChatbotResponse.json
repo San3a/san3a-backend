@@ -1,0 +1,15 @@
+{
+    "ChatbotResponse": {
+        "type": "object",
+        "properties": {
+            "status": { "type": "string", "example": "success" },
+            "data": {
+                "type": "object",
+                "properties": {
+                    "response": { "type": "string" },
+                    "category": { "type": "string" }
+                }
+            }
+        }
+    }
+}

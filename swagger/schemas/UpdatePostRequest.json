@@ -1,0 +1,21 @@
+{
+    "UpdatePostRequest": {
+        "type": "object",
+        "properties": {
+            "title": { "type": "string", "minLength": 5, "maxLength": 100 },
+            "description": { "type": "string", "minLength": 5 },
+            "images": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/ImageObject" }
+            },
+            "existingImages": {
+                "type": "array",
+                "items": { "type": "string", "description": "public_id of existing image" }
+            },
+            "tags": { "type": "array", "items": { "type": "string" }, "maxItems": 10 },
+            "category": { "type": "string" },
+            "location": { "$ref": "#/components/schemas/Point" }
+        },
+        "description": "At least one of images or existingImages must be provided"
+    }
+}

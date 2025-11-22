@@ -1,0 +1,12 @@
+{
+    "DeleteMeResponse": {
+        "type": "object",
+        "properties": {
+            "status": { "type": "string", "example": "success" },
+            "data": {
+                "type": "object",
+                "properties": { "user": { "$ref": "#/components/schemas/User" } }
+            }
+        }
+    }
+}

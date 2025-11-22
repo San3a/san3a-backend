@@ -74,3 +74,26 @@ export const createImageMessages = async (conversationId, author, images) => {
 
     return createdMessages;
 };
+
+export const getUserConversationsWithOtherUser = async (userId) => {
+    const conversations = await Conversation.find({ participants: userId })
+        .populate({
+            path: 'participants',
+            select: 'username name avatar email bio',
+        })
+        .populate({
+            path: 'messages',
+            options: { sort: { date: -1 }, limit: 1 },
+            populate: { path: 'author', select: 'username name avatar' },
+        });
+
+    return conversations.map((conv) => {
+        const otherUser = conv.participants.find((p) => p._id.toString() !== userId);
+
+        return {
+            _id: conv._id,
+            otherUser,
+            lastMessage: conv.messages[0] || null,
+        };
+    });
+};

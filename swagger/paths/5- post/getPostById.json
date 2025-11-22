@@ -1,0 +1,23 @@
+{
+    "/posts/{id}": {
+        "get": {
+            "tags": ["Post"],
+            "summary": "Get a post by ID",
+            "security": [{ "bearerAuth": [] }],
+            "parameters": [
+                { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Post details",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/PostResponse" }
+                        }
+                    }
+                },
+                "404": { "description": "Post not found" }
+            }
+        }
+    }
+}

@@ -1,0 +1,53 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "San3a API",
+        "description": "API documentation for San3a application",
+        "version": "1.0.0",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "servers": [
+        {
+            "url": "https://san3a-api.vercel.app/api",
+            "description": "Production server"
+        },
+        {
+            "url": "http://localhost:3000/api",
+            "description": "Development server"
+        }
+    ],
+    "tags": [
+        { "name": "San3a", "description": "San3a API Documentation" },
+        { "name": "Authentication", "description": "Login, signup, password management" },
+        { "name": "Admin", "description": "Administrative analytics and operations" },
+        { "name": "User", "description": "User management and profile" },
+        { "name": "Category", "description": "Service categories" },
+        { "name": "Post", "description": "Service request posts" },
+        { "name": "Offer", "description": "Technician offers on posts" },
+        { "name": "Review", "description": "Service reviews" },
+        { "name": "TechService", "description": "Technician service listings" },
+        { "name": "PastWork", "description": "Technician past work portfolio" },
+        { "name": "Chat", "description": "Conversations and messages" },
+        { "name": "Chatbot", "description": "AI assistance endpoints" }
+    ],
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "description": "Enter your bearer token in the format **Bearer <token>**"
+            }
+        },
+        "schemas": {}
+    },
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
+    "paths": {}
+}

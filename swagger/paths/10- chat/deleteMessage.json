@@ -1,0 +1,29 @@
+{
+    "/chat/{messageId}": {
+        "delete": {
+            "tags": ["Chat"],
+            "summary": "Delete a message by ID",
+            "security": [],
+            "parameters": [
+                {
+                    "name": "messageId",
+                    "in": "path",
+                    "required": true,
+                    "schema": { "type": "string" }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Message deleted",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/DeleteMessageResponse" }
+                        }
+                    }
+                },
+                "404": { "description": "Message not found" },
+                "500": { "description": "Failed to delete message" }
+            }
+        }
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "/tech-services/{id}": {
+        "patch": {
+            "tags": ["TechService"],
+            "summary": "Update tech service",
+            "security": [{ "bearerAuth": [] }],
+            "parameters": [
+                { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": { "$ref": "#/components/schemas/UpdateTechServiceRequest" }
+                    },
+                    "multipart/form-data": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "images": {
+                                    "type": "array",
+                                    "items": { "type": "string", "format": "binary" }
+                                },
+                                "title": { "type": "string" },
+                                "description": { "type": "string" },
+                                "price": { "type": "number" },
+                                "category": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "Updated tech service",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/TechServiceResponse" }
+                        }
+                    }
+                },
+                "400": { "description": "Validation error (invalid update fields)" },
+                "404": { "description": "Not found" }
+            }
+        }
+    }
+}

@@ -8,7 +8,13 @@ import {
     SELECT_POST_OFFER,
     GET_USER_POSTS,
 } from '#src/modules/post/endpoints.js';
-import { DELETE_USER, UPDATE_USER, GETPASTWORK, GETMYREVIEWS } from '#src/modules/user/endpoints.js';
+import {
+    DELETE_USER,
+    UPDATE_USER,
+    GETPASTWORK,
+    GETMYREVIEWS,
+    GET_TOP_TECHNICIANS_NEARBY,
+} from '#src/modules/user/endpoints.js';
 
 import {
     GET_ALL_TECHSERVICES,
@@ -50,5 +56,8 @@ export default [
     CREATE_APPOINTMENT,
     PAY_FOR_TECH_SERVICE,
     CREATE_SERVICE_ORDER,
-    CANCEL_PAYMENT
+    CANCEL_PAYMENT,
+
+    
+    GET_TOP_TECHNICIANS_NEARBY,
 ];

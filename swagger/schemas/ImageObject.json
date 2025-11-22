@@ -1,0 +1,10 @@
+{
+    "ImageObject": {
+        "type": "object",
+        "properties": {
+            "public_id": { "type": "string" },
+            "url": { "type": "string" }
+        },
+        "required": ["public_id", "url"]
+    }
+}

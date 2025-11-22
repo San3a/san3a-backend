@@ -1,0 +1,23 @@
+{
+    "/posts/{postId}/offers/did-make-offer": {
+        "get": {
+            "tags": ["Offer"],
+            "summary": "Check if authenticated technician already made an offer",
+            "security": [{ "bearerAuth": [] }],
+            "parameters": [
+                { "name": "postId", "in": "path", "required": true, "schema": { "type": "string" } }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Check result",
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref": "#/components/schemas/DidMakeOfferResponse" }
+                        }
+                    }
+                },
+                "404": { "description": "Post not found" }
+            }
+        }
+    }
+}

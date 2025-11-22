@@ -1,0 +1,15 @@
+{
+    "AuthSuccessResponse": {
+        "type": "object",
+        "properties": {
+            "status": { "type": "string", "example": "success" },
+            "token": { "type": "string", "example": "jwt_token_here" },
+            "data": {
+                "type": "object",
+                "properties": {
+                    "user": { "$ref": "#/components/schemas/User" }
+                }
+            }
+        }
+    }
+}

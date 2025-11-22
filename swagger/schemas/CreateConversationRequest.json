@@ -1,0 +1,9 @@
+{
+    "CreateConversationRequest": {
+        "type": "object",
+        "required": ["participants"],
+        "properties": {
+            "participants": { "type": "array", "items": { "type": "string" }, "minItems": 2 }
+        }
+    }
+}

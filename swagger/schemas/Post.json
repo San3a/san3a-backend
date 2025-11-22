@@ -1,0 +1,32 @@
+{
+    "Post": {
+        "type": "object",
+        "properties": {
+            "_id": { "type": "string" },
+            "user": { "$ref": "#/components/schemas/UserSummary" },
+            "images": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/ImageObject" }
+            },
+            "title": { "type": "string" },
+            "description": { "type": "string" },
+            "tags": { "type": "array", "items": { "type": "string" } },
+            "category": { "$ref": "#/components/schemas/Category" },
+            "location": { "$ref": "#/components/schemas/Point" },
+            "status": {
+                "type": "string",
+                "enum": ["open", "in-progress", "completed"],
+                "example": "open"
+            },
+            "offersCount": { "type": "integer", "example": 0 },
+            "selectedOffer": {
+                "oneOf": [
+                    { "$ref": "#/components/schemas/SelectedOfferSummary" },
+                    { "type": "null" }
+                ]
+            },
+            "createdAt": { "type": "string", "format": "date-time" },
+            "updatedAt": { "type": "string", "format": "date-time" }
+        }
+    }
+}

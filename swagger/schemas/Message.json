@@ -1,0 +1,14 @@
+{
+    "Message": {
+        "type": "object",
+        "properties": {
+            "_id": { "type": "string" },
+            "conversation": { "type": "string" },
+            "author": { "$ref": "#/components/schemas/ChatUserSummary" },
+            "content": { "type": "string" },
+            "date": { "type": "string", "format": "date-time" },
+            "type": { "type": "string", "enum": ["text", "image"], "example": "text" },
+            "images": { "type": "array", "items": { "$ref": "#/components/schemas/ImageObject" } }
+        }
+    }
+}
