@@ -3,8 +3,11 @@ import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { Strategy as GithubStrategy } from 'passport-github2';
 import User from '#src/modules/user/user.model.js';
+import crypto from 'crypto';
 
+// ------------------------
 // GOOGLE STRATEGY
+// ------------------------
 passport.use(
     new GoogleStrategy(
         {
@@ -15,6 +18,15 @@ passport.use(
         },
         async (accessToken, refreshToken, profile, done) => {
             try {
+                // Extract email from profile
+                const email =
+                    profile.emails && profile.emails.length > 0 ? profile.emails[0].value : null;
+
+                if (!email) {
+                    return done(null, false, { message: 'No email found in Google profile' });
+                }
+
+                // Find existing user or by Google authProviderId
                 let user = await User.findOne({
                     $or: [{ email }, { authProvider: 'google', authProviderId: profile.id }],
                 });
@@ -22,12 +34,17 @@ passport.use(
                 if (!user) {
                     user = await User.create({
                         name: profile.displayName || 'Google User',
-                        email:profile.emails?.[0]?.value,
+                        email,
                         authProvider: 'google',
                         authProviderId: profile.id,
+                        password: crypto.randomBytes(20).toString('hex'), // random password for local
+                        passwordConfirm: crypto.randomBytes(20).toString('hex'),
                         image: {
                             public_id: `google-${profile.id}`,
-                            url: profile.photos?.[0]?.value || 'https://via.placeholder.com/150',
+                            url:
+                                profile.photos && profile.photos.length > 0
+                                    ? profile.photos[0].value
+                                    : 'https://via.placeholder.com/150',
                         },
                     });
                 }
@@ -40,7 +57,9 @@ passport.use(
     )
 );
 
+// ------------------------
 // GITHUB STRATEGY
+// ------------------------
 passport.use(
     new GithubStrategy(
         {
@@ -52,8 +71,15 @@ passport.use(
         },
         async (accessToken, refreshToken, profile, done) => {
             try {
-                const email = profile.emails?.[0]?.value;
+                // Extract email
+                const email =
+                    profile.emails && profile.emails.length > 0 ? profile.emails[0].value : null;
 
+                if (!email) {
+                    return done(null, false, { message: 'No email found in GitHub profile' });
+                }
+
+                // Find existing user or by GitHub authProviderId
                 let user = await User.findOne({
                     $or: [{ email }, { authProvider: 'github', authProviderId: profile.id }],
                 });
@@ -61,12 +87,17 @@ passport.use(
                 if (!user) {
                     user = await User.create({
                         name: profile.displayName || profile.username || 'GitHub User',
-                        email:profile.emails?.[0]?.value,
+                        email,
                         authProvider: 'github',
                         authProviderId: profile.id,
+                        password: crypto.randomBytes(20).toString('hex'), // random password for local
+                        passwordConfirm: crypto.randomBytes(20).toString('hex'),
                         image: {
                             public_id: `github-${profile.id}`,
-                            url: profile.photos?.[0]?.value || 'https://via.placeholder.com/150',
+                            url:
+                                profile.photos && profile.photos.length > 0
+                                    ? profile.photos[0].value
+                                    : 'https://via.placeholder.com/150',
                         },
                     });
                 }

@@ -1,10 +1,10 @@
-import User from '../user/user.model.js';
 import jwt from 'jsonwebtoken';
 import asyncHandler from 'express-async-handler';
 import AppError from '#src/shared/utils/app-error.js';
 import sendEmail from '#src/shared/utils/email.js';
 import crypto from 'crypto';
 import { StatusCodes } from 'http-status-codes';
+import User from '../user/user.model.js';
 
 // Helpers
 const signToken = (id) =>
@@ -133,17 +133,31 @@ export const updatePassword = asyncHandler(async (req, res, next) => {
     createSendToken(user, StatusCodes.OK, res);
 });
 
+// helpers.js
+export const createTokenData = (user) => {
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRES_IN,
+    });
+
+    return { token, user };
+};
+
 // NEW: one common callback for Google & GitHub
 export const socialLoginCallback = (req, res) => {
-    // req.user is set by passport strategies
     if (!req.user) {
         return res
             .status(StatusCodes.UNAUTHORIZED)
             .json({ status: 'fail', message: 'Authentication failed' });
     }
 
-    // reuse your normal JWT logic
-    createSendToken(req.user, StatusCodes.OK, res);
+    const { token, user } = createTokenData(req.user);
+
+    // Redirect to React frontend with token and user info
+    const redirectUrl = `http://localhost:5173/auth/callback?token=${token}&user=${encodeURIComponent(
+        JSON.stringify(user)
+    )}`;
+
+    return res.redirect(redirectUrl);
 };
 
 export default {
