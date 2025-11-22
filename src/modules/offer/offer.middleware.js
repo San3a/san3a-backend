@@ -21,7 +21,6 @@ export const isPostAvailable = asyncHandler(async (req, res, next) => {
 
 export const isOfferOnPost = asyncHandler(async (req, res, next) => {
     const { postId } = req.params;
-    console.log(req.params);
     const doesOfferExist = await Offer.exists({ _id: req.params.id, post: postId });
     if (!doesOfferExist) {
         return next(
