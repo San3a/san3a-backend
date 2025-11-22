@@ -108,7 +108,8 @@ import app from './app';
 
 ### Naming Conventions
 
-- **Files:** kebab-case (`user-controller.js`, `auth-middleware.js`)
+- **Files:** kebab-case for files outside of module feature (`global-error-handler.middleware.js`, `rate-limiter.middleware.js`)
+- **Files inside modules:** (`post.controller.js`, `post.model.js`, `post.routes.js`, `post.validator.js`)
 - **Classes:** PascalCase (`UserModel`, `AppError`)
 - **Functions/Variables:** camelCase (`getUserById`, `isAuthenticated`)
 - **Constants:** UPPER_SNAKE_CASE (`API_VERSION`, `MAX_FILE_SIZE`)
