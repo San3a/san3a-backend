@@ -60,6 +60,7 @@ const userSchema = new mongoose.Schema(
             validate: {
                 //This only works on CREATE and SAVE!!!
                 validator: function (el) {
+                    if (this.authProvider !== 'local') return true;
                     return el === this.password;
                 },
                 message: 'Passwords are not the same!',

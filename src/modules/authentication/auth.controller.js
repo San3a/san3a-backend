@@ -136,7 +136,7 @@ export const updatePassword = asyncHandler(async (req, res, next) => {
 });
 
 export const createTokenData = (user) => {
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN,
     });
 
@@ -151,7 +151,7 @@ export const socialLoginCallback = (req, res) => {
 
     const { token, user } = createTokenData(req.user);
 
-    const redirectUrl = `http://localhost:5173/auth/callback?token=${token}&user=${encodeURIComponent(
+    const redirectUrl = `${CLIENT_URL}/auth/callback?token=${token}&user=${encodeURIComponent(
         JSON.stringify(user)
     )}`;
 
