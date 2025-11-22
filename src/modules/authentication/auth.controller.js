@@ -5,6 +5,7 @@ import AppError from '#src/shared/utils/app-error.js';
 import sendEmail from '#src/shared/utils/email.js';
 import crypto from 'crypto';
 import { StatusCodes } from 'http-status-codes';
+import { CLIENT_URL } from '#src/config/config.js';
 
 // Helpers
 const signToken = (id, role) =>
@@ -133,5 +134,16 @@ export const updatePassword = asyncHandler(async (req, res, next) => {
 
     createSendToken(user, StatusCodes.OK, res);
 });
+export const socialLoginCallback = (req, res) => {
+    if (!req.user) {
+        return res
+            .status(StatusCodes.UNAUTHORIZED)
+            .json({ status: 'fail', message: 'Authentication failed' });
+    }
 
-export default { signup, login, forgotPassword, resetPassword, updatePassword };
+    const { token, user } = createTokenData(req.user);
+
+    const redirectUrl = `http://${CLIENT_URL}/auth/callback?token=${token}&user=${encodeURIComponent(JSON.stringify(user))}`;
+
+    return res.redirect(redirectUrl);
+};

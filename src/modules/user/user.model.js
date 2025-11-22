@@ -22,6 +22,17 @@ const userSchema = new mongoose.Schema(
             validate: [validator.isEmail, 'Please provide a valid email'],
             trim: true,
         },
+        //user authenticates (local / google / github)
+        authProvider: {
+            type: String,
+            enum: ['local', 'google', 'github'],
+            default: 'local',
+        },
+
+        //id from Google/GitHub
+        authProviderId: {
+            type: String,
+        },
         role: {
             type: String,
             enum: Object.values(roles),
@@ -29,13 +40,23 @@ const userSchema = new mongoose.Schema(
         },
         password: {
             type: String,
-            required: [true, 'User must have a password'],
+            required: [
+                function () {
+                    return this.authProvider === 'local';
+                },
+                'User must have a password',
+            ],
             minlength: [8, 'A user password must have more or equal than 8 characters'],
             select: false,
         },
         passwordConfirm: {
             type: String,
-            required: [true, 'User must confirm his password'],
+            required: [
+                function () {
+                    return this.authProvider === 'local';
+                },
+                'User must confirm his password',
+            ],
             validate: {
                 //This only works on CREATE and SAVE!!!
                 validator: function (el) {

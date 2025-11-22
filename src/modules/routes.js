@@ -1,5 +1,4 @@
 import postRoutes from './post/post.routes.js';
-
 import pastWorkRouter from '#src/modules/past-work/past-work.routes.js';
 import techSerivceRouter from '#src/modules/tech-service/tech-service.routes.js';
 import categoryRouter from '#src/modules/category/category.routes.js';
@@ -10,13 +9,13 @@ import chatRoutes from '#src/modules/chat/chat-route.js';
 import chatbotRoutes from '#src/modules/chatbot/chatbot.routes.js';
 import adminRoutes from '#src/modules/admin/admin.route.js';
 import customOfferRoutes from '#src/modules/offer/customOffer.routes.js';
-
 import appointmentRoutes from '#src/modules/appointment/appointment.routes.js';
 import paymentRoutes from '#src/modules/payment/payment.routes.js';
-
 import ServiceOrderRoutes from '#src/modules/ServiceOrder/service-order.routes.js';
+import passport from '#src/shared/utils/passport.js';
 
 const mountRoutes = (app) => {
+    app.use(passport.initialize());
     app.use('/api/past-work', pastWorkRouter);
     app.use('/api/offers', customOfferRoutes);
     app.use('/api/tech-services', techSerivceRouter);
@@ -30,7 +29,7 @@ const mountRoutes = (app) => {
     app.use('/api/admin', adminRoutes);
     app.use('/api/appointments', appointmentRoutes);
     app.use('/api/payments', paymentRoutes);
-    app.use('/api/service-order', ServiceOrderRoutes)
+    app.use('/api/service-order', ServiceOrderRoutes);
 };
 
 export default mountRoutes;
