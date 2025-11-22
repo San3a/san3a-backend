@@ -13,6 +13,7 @@ const offerSchema = new mongoose.Schema({
     },
     price: {
         type: Number,
+        required: [true, 'Offer must have a price'],
         validate: {
             validator: function (value) {
                 return value >= 0;
@@ -23,6 +24,11 @@ const offerSchema = new mongoose.Schema({
     message: {
         type: String,
         required: [true, 'Offer must have a message'],
+    },
+    status: {
+        type: String,
+        enum: ['pending', 'accepted', 'rejected'],
+        default: 'pending'
     },
     createdAt: {
         type: Date,
@@ -39,14 +45,22 @@ offerSchema.pre('save', function (next) {
     if (!this.isNew) this.updatedAt = Date.now();
     next();
 });
+
 offerSchema.pre('findOneAndUpdate', function (next) {
     this.set({ updatedAt: Date.now() });
     next();
 });
 
 offerSchema.pre(/^find/, function (next) {
-    this.populate('technician');
+    this.populate({
+        path: 'technician',
+        select: 'name email image'
+    })
+    .populate({
+        path: 'post'
+    })
     next();
 });
 
-export default mongoose.model('Offer', offerSchema);
+const Offer = mongoose.model('Offer', offerSchema);
+export default Offer;

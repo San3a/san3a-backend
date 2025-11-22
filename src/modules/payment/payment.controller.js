@@ -24,16 +24,12 @@ export const createCheckoutSessionForOffer = asyncHandler(async (req, res, next)
         throw new AppError('Offer not found', StatusCodes.NOT_FOUND);
     }
 
-    if (offer.post.user.toString() !== req.user.id) {
-        throw new AppError('You are not allowed to pay for this offer', StatusCodes.FORBIDDEN);
-    }
-
     // 3) Stripe Checkout Session
     const session = await stripe.checkout.sessions.create({
         mode: 'payment',
         payment_method_types: ['card'],
-        success_url: `${CLIENT_URL}/payments/success?type=offer&offerId=${offer.id}`,
-        cancel_url: `${CLIENT_URL}/payment-cancel`,
+        success_url: `${CLIENT_URL}/success-cash-payment`,
+        cancel_url: `${CLIENT_URL}/payment-cancel?session_id={CHECKOUT_SESSION_ID}`,
         customer_email: req.user.email,
         metadata: {
             type: 'offer',
@@ -56,6 +52,23 @@ export const createCheckoutSessionForOffer = asyncHandler(async (req, res, next)
             },
         ],
     });
+
+    await ServiceOrder.create({
+        user: req.user.id,
+        serviceType: 'Offer',
+        service: offerId,
+        paymentMethod: 'stripe',
+        paidAt: new Date(),
+    });
+
+    // update the technican id totalEarning
+    await User.updateOne(
+        { _id:  offer?.technician?._id },
+        { $inc: {
+            totalEarning: offer?.price
+        } }
+    );
+
 
     res.status(StatusCodes.OK).json({
         status: 'success',
@@ -167,6 +180,7 @@ export const createCheckoutSessionForTechService = asyncHandler(async (req, res,
     // create new service order
     await ServiceOrder.create({
         user: req.user.id,
+        serviceType: 'TechService',
         service: techServiceId,
         paymentMethod: 'stripe',
         paidAt: new Date(),

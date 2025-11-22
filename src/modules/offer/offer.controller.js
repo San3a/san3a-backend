@@ -23,3 +23,15 @@ export const didTechnicianMakeOffer = asyncHandler(async (req, res, next) => {
         },
     });
 });
+
+export const getSingleOffer = asyncHandler(async(req, res, next) => {
+    const {id} = req.params;
+    const offer = await Offer.findById(id);
+    
+    res.status(StatusCodes.OK).json({
+        status: SUCCESS,
+        data: {
+            offer,
+        },
+    })
+})
